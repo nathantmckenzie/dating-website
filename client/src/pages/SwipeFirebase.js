@@ -9,13 +9,15 @@ export default function SwipeFirebase() {
   const db = app.firestore();
 
   useEffect(() => {
+    let firebaseData;
     db.collection("users")
       .get()
       .then(function (querySnapshot) {
-        querySnapshot.docs.map(function (doc) {
-          setDetails(doc.data());
+        firebaseData = querySnapshot.docs.map(function (doc) {
+          return doc.data();
         });
-      });
+      })
+      .then(() => setDetails(firebaseData));
   }, []);
 
   const swipeLeft = () => {
@@ -29,13 +31,7 @@ export default function SwipeFirebase() {
   };
 
   const swipeRight = () => {
-    db.collection("users")
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          console.log(doc.data());
-        });
-      });
+    setDetails(details.filter((detail, index) => detail !== details[0]));
   };
 
   const onSwipe = (direction) => {
@@ -49,9 +45,17 @@ export default function SwipeFirebase() {
 
   return (
     <div>
-      <img src={details.avatar} height="300" width="300" />
-      <h3>{details.firstName}</h3>
-      <button onClick={swipeRight}>swipe</button>
+      {console.log("DETaILS", details)}
+      {details.length > 0 ? (
+        <>
+          {console.log("details", details)}
+          <img src={details[0].avatar} height="300" width="300" />
+          <h3>{details[0].firstName}</h3>
+          <button onClick={swipeRight}>swipe</button>
+        </>
+      ) : (
+        <h4>Sorry! No More Profiles In Your Area</h4>
+      )}
     </div>
   );
 }
