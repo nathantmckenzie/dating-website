@@ -19,7 +19,7 @@ export default function Signup() {
     e.preventDefault();
 
     const db = app.firestore();
-    const current = firebaseAuth.currentUser.email;
+    const currentUID = firebaseAuth.currentUser.uid;
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
@@ -31,7 +31,7 @@ export default function Signup() {
       await signup(emailRef.current.value, passwordRef.current.value);
       await db
         .collection("users")
-        .doc(emailRef.current.value)
+        .doc(currentUID)
         .set(
           {
             firstName: firstNameRef.current.value,
@@ -45,6 +45,7 @@ export default function Signup() {
         .catch((error) => {
           console.error("Error writing document: ", error);
         });
+      console.log("CURRENT UID", currentUID);
       history.push("/personalityquiz");
     } catch (error) {
       console.log("ERROR", error);

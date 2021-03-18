@@ -15,10 +15,11 @@ function Question(props) {
   console.log("current USER BABY", current);
 
   //get data
-  db.collection("personality-type")
+  db.collection("users")
+    .doc(current)
     .get()
-    .then((snapshot) => {
-      console.log("SNAPSHOT.DOCS BABY", snapshot.docs);
+    .then((doc) => {
+      console.log("DOC DATA", doc.data());
     });
 
   const results = {

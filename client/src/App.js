@@ -40,7 +40,12 @@ function App() {
             component={() => <Results result={result} setResult={setResult} />}
           />
           <Route path="/chat" component={Chat} />
-          <Route path="/accountdetails" component={AccountDetails} />
+          <Route
+            path="/accountdetails"
+            component={AccountDetails}
+            result={result}
+            setResult={setResult}
+          />
           <Route path="/swipe" component={Swipe} />
         </div>
       </Router>
