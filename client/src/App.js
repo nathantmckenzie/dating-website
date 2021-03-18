@@ -7,6 +7,7 @@ import PhotoUpload from "./pages/PhotoUpload";
 import Results from "./pages/Results";
 import Chat from "./pages/Chat";
 import Swipe from "./pages/Swipe";
+import SwipeFirebase from "./pages/SwipeFirebase";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import AccountDetails from "./pages/AccountDetails";
@@ -47,6 +48,7 @@ function App() {
             setResult={setResult}
           />
           <Route path="/swipe" component={Swipe} />
+          <Route path="/swipefirebase" component={SwipeFirebase} />
         </div>
       </Router>
     </AuthProvider>

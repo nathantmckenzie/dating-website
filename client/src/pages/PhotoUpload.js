@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { app, firebaseAuth } from "../base";
 
-function PhotoUpload({ avatars, setAvatars }) {
+function PhotoUpload() {
   const [fileUrl, setFileUrl] = React.useState(null);
   const [users, setUsers] = useState([]);
   const [test, setTest] = useState([]);
@@ -21,7 +21,6 @@ function PhotoUpload({ avatars, setAvatars }) {
     e.preventDefault();
     const username = e.target.username.value;
     setTest([...test, fileUrl]);
-    setAvatars([...avatars, fileUrl]);
     if (!username || !fileUrl) {
       return;
     }
