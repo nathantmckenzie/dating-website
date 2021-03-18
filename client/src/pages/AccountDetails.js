@@ -17,5 +17,13 @@ export default function AccountDetails({ result, setResult }) {
       });
   }, []);
 
-  return <div>{console.log("details", details)}</div>;
+  return (
+    <div>
+      <h4>
+        {details.firstName} {details.lastName}
+      </h4>
+      <img src={details.avatar} height="400" width="400" />
+      <h4>{details.personality}</h4>
+    </div>
+  );
 }
