@@ -110,18 +110,6 @@ const Chat = () => {
     <Container>
       <Messages user={state.user} />
       <Row>
-        <Col xs={2} style={{ padding: 0 }}>
-          <FormInput
-            label="User"
-            value={state.user}
-            onChange={(evt) =>
-              stateSet({
-                ...state,
-                user: evt.target.value,
-              })
-            }
-          />
-        </Col>
         <Col xs={8}>
           <FormInput
             label="Content"

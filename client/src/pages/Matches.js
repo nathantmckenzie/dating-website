@@ -1,6 +1,13 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 export default function Matches({ possibleMatches }) {
+  const history = useHistory();
+
+  const clickHandler = () => {
+    history.push("/chat");
+  };
+
   return (
     <div>
       <h3>Matches</h3>
@@ -25,7 +32,7 @@ export default function Matches({ possibleMatches }) {
       <div className="all-messages" pre>
         {possibleMatches.map((possibleMatch) => {
           return (
-            <div className="match-picture-message">
+            <div className="match-picture-message" onClick={clickHandler}>
               <img
                 src={possibleMatch.picture}
                 width="100"
