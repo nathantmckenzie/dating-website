@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import TinderCard from "react-tinder-card";
 import { app, firebaseAuth } from "../base";
 import Matches from "./Matches";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import CloseIcon from "@material-ui/icons/Close";
+import ReplayIcon from "@material-ui/icons/Replay";
+import StarRateIcon from "@material-ui/icons/StarRate";
+import FlashOnIcon from "@material-ui/icons/FlashOn";
+import IconButton from "@material-ui/core/IconButton";
 
 export default function SwipeFirebase() {
   const [details, setDetails] = useState();
@@ -114,10 +120,27 @@ export default function SwipeFirebase() {
                 className="profile-picture"
               />
               <h3>{details[0].firstName}</h3>
-              <h3>{details[0].personality}</h3>
+              <h4>{details[0].personality}</h4>
             </TinderCard>
-            <button onClick={swipeLeft}>Swipe Left</button>
-            <button onClick={swipeRight}>Swipe Right</button>
+            <div className="swipeButtons">
+              {/*<button onClick={swipeLeft}>Swipe Left</button>
+              <button onClick={swipeRight}>Swipe Right</button>*/}
+              <IconButton className="swipeButtons__repeat">
+                <ReplayIcon fontSize="large" />
+              </IconButton>
+              <IconButton className="swipeButtons__left">
+                <CloseIcon fontSize="large" />
+              </IconButton>
+              <IconButton className="swipeButtons__star">
+                <StarRateIcon fontSize="large" />
+              </IconButton>
+              <IconButton className="swipeButtons__right">
+                <FavoriteIcon fontSize="large" />
+              </IconButton>
+              <IconButton className="swipeButtons__lightning">
+                <FlashOnIcon fontSize="large" />
+              </IconButton>
+            </div>
           </div>
           <Matches details={details} />
         </>

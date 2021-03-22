@@ -23,6 +23,7 @@ export default function Matches({ possibleMatches, details }) {
                 width="100"
                 height="100"
                 className="match-picture"
+                onClick={clickHandler}
               />
               <h4 className="match-name">{detail.firstName} </h4>
             </div>

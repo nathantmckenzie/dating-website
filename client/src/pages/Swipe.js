@@ -3,6 +3,7 @@ import profilesObject from "../profiles-objects.js";
 import Bobby from "../pictures/bobby.jpeg";
 import Matches from "./Matches";
 import TinderCard from "react-tinder-card";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 export default function Swipe() {
   const [profile, setProfile] = useState({
@@ -73,6 +74,7 @@ export default function Swipe() {
           <div className="swipe-buttons">
             <button onClick={swipeLeft}>Swipe Left</button>
             <button onClick={swipeRight}>Swipe Right</button>
+            <FavoriteIcon />
           </div>
         </>
       ) : (
