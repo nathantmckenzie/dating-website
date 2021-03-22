@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TinderCard from "react-tinder-card";
 import { app, firebaseAuth } from "../base";
+import Matches from "./Matches";
 
 export default function SwipeFirebase() {
   const [details, setDetails] = useState();
@@ -52,8 +53,10 @@ export default function SwipeFirebase() {
   };
 
   const swipeRight = () => {
+    let id = makeid(20);
+
     db.collection("swipes")
-      .doc(makeid(20))
+      .doc(id)
       .set(
         {
           by_user: currentEmail,
@@ -68,16 +71,15 @@ export default function SwipeFirebase() {
 
     db.collection("users").doc(currentEmail).set(
       {
-        match_id: 10,
+        match_id: id,
       },
       { merge: true }
     );
 
     db.collection("swipes")
       .where("by_user", "==", details[0].firstName)
+      .where("swipe_right", "==", true)
       .where("to_user", "==", currentEmail)
-      .where("is_right", "==", true)
-      .get()
       .then(console.log("LET'S GO"))
       .then(() => {
         setMatchMessage(true);
@@ -101,21 +103,24 @@ export default function SwipeFirebase() {
   return (
     <div>
       {details ? (
-        <div className="swipe-profile">
-          <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
-            {console.log("details", details)}
-            <img
-              src={details[0].avatar}
-              height="500"
-              width="500"
-              className="profile-picture"
-            />
-            <h3>{details[0].firstName}</h3>
-            <h3>{details[0].personality}</h3>
-          </TinderCard>
-          <button onClick={swipeLeft}>Swipe Left</button>
-          <button onClick={swipeRight}>Swipe Right</button>
-        </div>
+        <>
+          <div className="swipe-profile">
+            <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
+              {console.log("details", details)}
+              <img
+                src={details[0].avatar}
+                height="500"
+                width="500"
+                className="profile-picture"
+              />
+              <h3>{details[0].firstName}</h3>
+              <h3>{details[0].personality}</h3>
+            </TinderCard>
+            <button onClick={swipeLeft}>Swipe Left</button>
+            <button onClick={swipeRight}>Swipe Right</button>
+          </div>
+          <Matches details={details} />
+        </>
       ) : (
         <div>Data loading</div>
       )}

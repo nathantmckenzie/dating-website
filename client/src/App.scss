@@ -212,11 +212,13 @@ vertical-align: middle;
 .match-picture-name {
   display: flex;
   flex-direction: column;
+  margin-right: 10px;
 }
 
 .all-matches {
   display: flex;
   flex-direction: row;
+  margin-left: 20px;
 }
 
 .profile-picture {
@@ -245,4 +247,9 @@ vertical-align: middle;
   display: flex;
   justify-content: center;
   color: red;
+}
+
+.match-name {
+  display: flex;
+  justify-content: center;
 }
