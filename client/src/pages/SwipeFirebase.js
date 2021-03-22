@@ -109,13 +109,13 @@ export default function SwipeFirebase() {
   };
 
   return (
-    <div className="main-page">
-      <div class="matches">
-        <Matches details={details} />
-      </div>
-      <div className="swiping">
-        {details ? (
-          <>
+    <>
+      {details ? (
+        <div className="main-page">
+          <div class="matches">
+            <Matches details={details} />
+          </div>
+          <div className="swiping">
             <div className="swipe-profile">
               <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
                 {console.log("details", details)}
@@ -151,11 +151,11 @@ export default function SwipeFirebase() {
                 </IconButton>
               </div>
             </div>
-          </>
-        ) : (
-          <div>Data loading</div>
-        )}
-      </div>
-    </div>
+          </div>
+        </div>
+      ) : (
+        <div>Data loading</div>
+      )}
+    </>
   );
 }

@@ -210,18 +210,32 @@ vertical-align: middle;
 }
 
 .match-picture {
+  border-radius: 5%;
+}
+
+.message-picture {
   border-radius: 50%;
 }
 
 .match-picture-name {
   display: flex;
   flex-direction: column;
-  margin-right: 10px;
+  margin-right: 5px;
+  margin-top: 5px;
+  position: relative;
+}
+
+.match-picture-name:hover {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5px;
+  margin-top: 5px;
+  position: relative;
 }
 
 .all-matches {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
   margin-left: 20px;
 }
 
@@ -254,9 +268,17 @@ vertical-align: middle;
 }
 
 .match-name {
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  color: white;
+  bottom: 1px;
+  right: 40px;
 }
+
+.matches-title-clicked, .messages-title-clicked {
+  text-decoration: underline;
+  text-decoration-color:#db1212;
+}
+
 
 .swipeButtons {
   display: flex;
@@ -297,5 +319,10 @@ vertical-align: middle;
 .main-page {
   display: grid;
   grid-template-columns: 25% 75%;
+}
+
+.page-titles {
+  display: flex;
+  justify-content: column;
 }
 
