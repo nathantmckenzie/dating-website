@@ -326,3 +326,13 @@ vertical-align: middle;
   justify-content: column;
 }
 
+.message-input {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.message-input-button {
+  display: flex;
+  flex-direction: row;
+}

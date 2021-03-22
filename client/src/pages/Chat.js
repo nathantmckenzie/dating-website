@@ -107,33 +107,31 @@ const Chat = () => {
     });
   };
   return (
-    <Container>
+    <div>
       <Messages user={state.user} />
-      <Row>
-        <Col xs={8}>
-          <FormInput
-            label="Content"
-            value={state.content}
-            onChange={(evt) =>
-              stateSet({
-                ...state,
-                content: evt.target.value,
-              })
+      <div className="message-input-button">
+        <FormInput
+          className="message-input"
+          label="Content"
+          value={state.content}
+          onChange={(evt) =>
+            stateSet({
+              ...state,
+              content: evt.target.value,
+            })
+          }
+          onKeyUp={(evt) => {
+            if (evt.keyCode === 13) {
+              onSend();
             }
-            onKeyUp={(evt) => {
-              if (evt.keyCode === 13) {
-                onSend();
-              }
-            }}
-          />
-        </Col>
-        <Col xs={2} style={{ padding: 0 }}>
-          <Button onClick={() => onSend()} style={{ width: "100%" }}>
-            Send
-          </Button>
-        </Col>
-      </Row>
-    </Container>
+          }}
+        />
+
+        <Button onClick={() => onSend()} style={{ width: "10%" }}>
+          Send
+        </Button>
+      </div>
+    </div>
   );
 };
 

@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Chat from "./Chat";
 
-export default function Matches({ possibleMatches, details }) {
+export default function Matches({
+  possibleMatches,
+  details,
+  showChat,
+  setShowChat,
+}) {
   const history = useHistory();
   const [showMatches, setShowMatches] = useState(true);
 
@@ -29,7 +34,10 @@ export default function Matches({ possibleMatches, details }) {
         <div className="all-matches" pre>
           {details.map((detail) => {
             return (
-              <div className="match-picture-name">
+              <div
+                className="match-picture-name"
+                onClick={() => setShowChat(true)}
+              >
                 <img
                   src={detail.avatar}
                   width="100"
@@ -45,7 +53,10 @@ export default function Matches({ possibleMatches, details }) {
         <div className="all-messages" pre>
           {details.map((detail) => {
             return (
-              <div className="match-picture-message">
+              <div
+                className="match-picture-message"
+                onClick={() => setShowChat(true)}
+              >
                 <img
                   src={detail.avatar}
                   width="100"

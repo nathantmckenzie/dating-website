@@ -13,7 +13,7 @@ import Chat from "./Chat";
 export default function SwipeFirebase() {
   const [details, setDetails] = useState();
   const [matchMessage, setMatchMessage] = useState(false);
-  const [showMessages, setShowMessages] = useState(false);
+  const [showChat, setShowChat] = useState(false);
 
   const db = app.firestore();
   const currentEmail = firebaseAuth.currentUser.email;
@@ -116,10 +116,18 @@ export default function SwipeFirebase() {
       {details ? (
         <div className="main-page">
           <div class="matches">
-            <button onClick={() => setShowMessages(!showMessages)}>show</button>
-            <Matches details={details} />
+            {showChat ? (
+              <button onClick={() => setShowChat(!showChat)}>
+                Keep Swiping
+              </button>
+            ) : null}
+            <Matches
+              details={details}
+              showChat={showChat}
+              setShowChat={setShowChat}
+            />
           </div>
-          {!showMessages ? (
+          {!showChat ? (
             <div className="swiping">
               <div className="swipe-profile">
                 <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
