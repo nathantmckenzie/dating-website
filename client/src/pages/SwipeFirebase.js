@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Bobby from "../pictures/bobby.jpeg";
-import Matches from "./Matches";
 import TinderCard from "react-tinder-card";
 import { app, firebaseAuth } from "../base";
 
@@ -8,7 +6,7 @@ export default function SwipeFirebase() {
   const [details, setDetails] = useState();
   const [matchMessage, setMatchMessage] = useState(false);
   const db = app.firestore();
-  const currentName = firebaseAuth.currentUser.firstName;
+  const currentEmail = firebaseAuth.currentUser.email;
 
   useEffect(() => {
     let firebaseData;
@@ -16,6 +14,8 @@ export default function SwipeFirebase() {
       .get()
       .then(function (querySnapshot) {
         firebaseData = querySnapshot.docs.map(function (doc) {
+          // doc.id
+
           return doc.data();
         });
       })
@@ -38,7 +38,7 @@ export default function SwipeFirebase() {
       .doc(makeid(20))
       .set(
         {
-          by_user: currentName,
+          by_user: currentEmail,
           to_user: details[0].firstName,
           swipe_right: false,
         },
@@ -56,7 +56,7 @@ export default function SwipeFirebase() {
       .doc(makeid(20))
       .set(
         {
-          by_user: currentName,
+          by_user: currentEmail,
           to_user: details[0].firstName,
           swipe_right: true,
         },
@@ -66,9 +66,16 @@ export default function SwipeFirebase() {
         console.log("Document successfully written!");
       });
 
+    db.collection("users").doc(currentEmail).set(
+      {
+        match_id: 10,
+      },
+      { merge: true }
+    );
+
     db.collection("swipes")
       .where("by_user", "==", details[0].firstName)
-      .where("to_user", "==", currentName)
+      .where("to_user", "==", currentEmail)
       .where("is_right", "==", true)
       .get()
       .then(console.log("LET'S GO"))
@@ -93,18 +100,24 @@ export default function SwipeFirebase() {
 
   return (
     <div>
-      {console.log("DETaILS", details)}
-      {matchMessage === false ? (
-        <>
-          {console.log("details", details)}
-          <img src={details[0].avatar} height="300" width="300" />
-          <h3>{details[0].firstName}</h3>
-          <h3>{details[0].personality}</h3>
+      {details ? (
+        <div className="swipe-profile">
+          <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
+            {console.log("details", details)}
+            <img
+              src={details[0].avatar}
+              height="500"
+              width="500"
+              className="profile-picture"
+            />
+            <h3>{details[0].firstName}</h3>
+            <h3>{details[0].personality}</h3>
+          </TinderCard>
           <button onClick={swipeLeft}>Swipe Left</button>
           <button onClick={swipeRight}>Swipe Right</button>
-        </>
+        </div>
       ) : (
-        <h4>It's a match!</h4>
+        <div>Data loading</div>
       )}
     </div>
   );
