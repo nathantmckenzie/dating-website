@@ -82,7 +82,8 @@ export default function SwipeFirebase() {
       { merge: true }
     );
 
-    db.collection("swipes")
+    {
+      /*db.collection("swipes")
       .where("by_user", "==", details[0].firstName)
       .where("swipe_right", "==", true)
       .where("to_user", "==", currentEmail)
@@ -92,7 +93,8 @@ export default function SwipeFirebase() {
       })
       .catch((error) => {
         console.log("Error getting documents: ", error);
-      });
+      });*/
+    }
 
     setDetails(details.filter((detail) => detail !== details[0]));
   };
@@ -107,46 +109,53 @@ export default function SwipeFirebase() {
   };
 
   return (
-    <div>
-      {details ? (
-        <>
-          <div className="swipe-profile">
-            <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
-              {console.log("details", details)}
-              <img
-                src={details[0].avatar}
-                height="500"
-                width="500"
-                className="profile-picture"
-              />
-              <h3>{details[0].firstName}</h3>
-              <h4>{details[0].personality}</h4>
-            </TinderCard>
-            <div className="swipeButtons">
-              {/*<button onClick={swipeLeft}>Swipe Left</button>
+    <div className="main-page">
+      <div class="matches">
+        <Matches details={details} />
+      </div>
+      <div className="swiping">
+        {details ? (
+          <>
+            <div className="swipe-profile">
+              <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
+                {console.log("details", details)}
+                <img
+                  src={details[0].avatar}
+                  height="500"
+                  width="500"
+                  className="profile-picture"
+                />
+                <h3>{details[0].firstName}</h3>
+                <h4>{details[0].personality}</h4>
+              </TinderCard>
+              <div className="swipeButtons">
+                {/*<button onClick={swipeLeft}>Swipe Left</button>
               <button onClick={swipeRight}>Swipe Right</button>*/}
-              <IconButton className="swipeButtons__repeat">
-                <ReplayIcon fontSize="large" />
-              </IconButton>
-              <IconButton className="swipeButtons__left">
-                <CloseIcon fontSize="large" />
-              </IconButton>
-              <IconButton className="swipeButtons__star">
-                <StarRateIcon fontSize="large" />
-              </IconButton>
-              <IconButton className="swipeButtons__right">
-                <FavoriteIcon fontSize="large" />
-              </IconButton>
-              <IconButton className="swipeButtons__lightning">
-                <FlashOnIcon fontSize="large" />
-              </IconButton>
+                <IconButton className="swipeButtons__repeat">
+                  <ReplayIcon fontSize="large" />
+                </IconButton>
+                <IconButton onClick={swipeLeft} className="swipeButtons__left">
+                  <CloseIcon fontSize="large" />
+                </IconButton>
+                <IconButton className="swipeButtons__star">
+                  <StarRateIcon fontSize="large" />
+                </IconButton>
+                <IconButton
+                  onClick={swipeRight}
+                  className="swipeButtons__right"
+                >
+                  <FavoriteIcon fontSize="large" />
+                </IconButton>
+                <IconButton className="swipeButtons__lightning">
+                  <FlashOnIcon fontSize="large" />
+                </IconButton>
+              </div>
             </div>
-          </div>
-          <Matches details={details} />
-        </>
-      ) : (
-        <div>Data loading</div>
-      )}
+          </>
+        ) : (
+          <div>Data loading</div>
+        )}
+      </div>
     </div>
   );
 }

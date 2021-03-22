@@ -203,8 +203,7 @@ vertical-align: middle;
 }
 
 .swipe-profile {
-  margin-top: 100px;
-  border:1px solid black;
+  margin-top: 10px;
   border-width: 100%;
   display: grid;
   justify-content: center;
@@ -293,5 +292,10 @@ vertical-align: middle;
 .swipeButtons__lightning {
   padding: 3vw !important;
   color: #915dd1 !important;
+}
+
+.main-page {
+  display: grid;
+  grid-template-columns: 25% 75%;
 }
 
