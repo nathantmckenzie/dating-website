@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import Chat from "./Chat";
 
 export default function Matches({ possibleMatches, details }) {
   const history = useHistory();
   const [showMatches, setShowMatches] = useState(true);
-
-  const clickHandler = () => {
-    history.push("/chat");
-  };
 
   console.log("DETAILS", details);
 
@@ -38,7 +35,6 @@ export default function Matches({ possibleMatches, details }) {
                   width="100"
                   height="100"
                   className="match-picture"
-                  onClick={clickHandler}
                 />
                 <h4 className="match-name">{detail.firstName} </h4>
               </div>
@@ -49,7 +45,7 @@ export default function Matches({ possibleMatches, details }) {
         <div className="all-messages" pre>
           {details.map((detail) => {
             return (
-              <div className="match-picture-message" onClick={clickHandler}>
+              <div className="match-picture-message">
                 <img
                   src={detail.avatar}
                   width="100"

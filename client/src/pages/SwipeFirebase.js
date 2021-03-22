@@ -8,10 +8,13 @@ import ReplayIcon from "@material-ui/icons/Replay";
 import StarRateIcon from "@material-ui/icons/StarRate";
 import FlashOnIcon from "@material-ui/icons/FlashOn";
 import IconButton from "@material-ui/core/IconButton";
+import Chat from "./Chat";
 
 export default function SwipeFirebase() {
   const [details, setDetails] = useState();
   const [matchMessage, setMatchMessage] = useState(false);
+  const [showMessages, setShowMessages] = useState(false);
+
   const db = app.firestore();
   const currentEmail = firebaseAuth.currentUser.email;
 
@@ -113,45 +116,53 @@ export default function SwipeFirebase() {
       {details ? (
         <div className="main-page">
           <div class="matches">
+            <button onClick={() => setShowMessages(!showMessages)}>show</button>
             <Matches details={details} />
           </div>
-          <div className="swiping">
-            <div className="swipe-profile">
-              <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
-                {console.log("details", details)}
-                <img
-                  src={details[0].avatar}
-                  height="500"
-                  width="500"
-                  className="profile-picture"
-                />
-                <h3>{details[0].firstName}</h3>
-                <h4>{details[0].personality}</h4>
-              </TinderCard>
-              <div className="swipeButtons">
-                {/*<button onClick={swipeLeft}>Swipe Left</button>
+          {!showMessages ? (
+            <div className="swiping">
+              <div className="swipe-profile">
+                <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
+                  {console.log("details", details)}
+                  <img
+                    src={details[0].avatar}
+                    height="500"
+                    width="500"
+                    className="profile-picture"
+                  />
+                  <h3>{details[0].firstName}</h3>
+                  <h4>{details[0].personality}</h4>
+                </TinderCard>
+                <div className="swipeButtons">
+                  {/*<button onClick={swipeLeft}>Swipe Left</button>
               <button onClick={swipeRight}>Swipe Right</button>*/}
-                <IconButton className="swipeButtons__repeat">
-                  <ReplayIcon fontSize="large" />
-                </IconButton>
-                <IconButton onClick={swipeLeft} className="swipeButtons__left">
-                  <CloseIcon fontSize="large" />
-                </IconButton>
-                <IconButton className="swipeButtons__star">
-                  <StarRateIcon fontSize="large" />
-                </IconButton>
-                <IconButton
-                  onClick={swipeRight}
-                  className="swipeButtons__right"
-                >
-                  <FavoriteIcon fontSize="large" />
-                </IconButton>
-                <IconButton className="swipeButtons__lightning">
-                  <FlashOnIcon fontSize="large" />
-                </IconButton>
+                  <IconButton className="swipeButtons__repeat">
+                    <ReplayIcon fontSize="large" />
+                  </IconButton>
+                  <IconButton
+                    onClick={swipeLeft}
+                    className="swipeButtons__left"
+                  >
+                    <CloseIcon fontSize="large" />
+                  </IconButton>
+                  <IconButton className="swipeButtons__star">
+                    <StarRateIcon fontSize="large" />
+                  </IconButton>
+                  <IconButton
+                    onClick={swipeRight}
+                    className="swipeButtons__right"
+                  >
+                    <FavoriteIcon fontSize="large" />
+                  </IconButton>
+                  <IconButton className="swipeButtons__lightning">
+                    <FlashOnIcon fontSize="large" />
+                  </IconButton>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <Chat />
+          )}
         </div>
       ) : (
         <div>Data loading</div>
