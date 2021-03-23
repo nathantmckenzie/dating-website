@@ -1,142 +1,68 @@
 import React from "react";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useSubscription,
-  useMutation,
-  gql,
-} from "@apollo/client";
-import { WebSocketLink } from "@apollo/client/link/ws";
-import { Container, Row, Col, FormInput, Button } from "shards-react";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { app, auth, firebaseAuth, firestore } from "../base";
+import { useState } from "react";
 
-const link = new WebSocketLink({
-  uri: `ws://localhost:4000/`,
-  options: {
-    reconnect: true,
-  },
-});
+const ChatMessage = (props) => {
+  const { text, uid } = props.message;
 
-const client = new ApolloClient({
-  link,
-  uri: "http://localhost:4000/",
-  cache: new InMemoryCache(),
-});
-
-const GET_MESSAGES = gql`
-  subscription {
-    messages {
-      id
-      content
-      user
-    }
-  }
-`;
-
-const POST_MESSAGE = gql`
-  mutation($user: String!, $content: String!) {
-    postMessage(user: $user, content: $content)
-  }
-`;
-
-const Messages = ({ user }) => {
-  const { data } = useSubscription(GET_MESSAGES);
-  if (!data) {
-    return null;
-  }
+  const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
 
   return (
-    <>
-      {data.messages.map(({ id, user: messageUser, content }) => (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: user === messageUser ? "flex-end" : "flex-start",
-            paddingBottom: "1em",
-          }}
-        >
-          {user !== messageUser && (
-            <div
-              style={{
-                height: 50,
-                width: 50,
-                marginRight: "0.5em",
-                border: "2px solid #e5e6ea",
-                borderRadius: 25,
-                textAlign: "center",
-                fontSize: "18pt",
-                paddingTop: 5,
-              }}
-            >
-              {messageUser.slice(0, 2).toUpperCase()}
-            </div>
-          )}
-          <div
-            style={{
-              background: user === messageUser ? "blue" : "#e5e6ea",
-              color: user === messageUser ? "white" : "black",
-              padding: "1em",
-              borderRadius: "1em",
-              maxWidth: "60%",
-            }}
-          >
-            {content}
-          </div>
-        </div>
-      ))}
-    </>
-  );
-};
-
-const Chat = () => {
-  const [state, stateSet] = React.useState({
-    user: "Jack",
-    content: "",
-  });
-  const [postMessage] = useMutation(POST_MESSAGE);
-
-  const onSend = () => {
-    if (state.content.length > 0) {
-      postMessage({
-        variables: state,
-      });
-    }
-    stateSet({
-      ...state,
-      content: "",
-    });
-  };
-  return (
-    <div>
-      <Messages user={state.user} />
-      <div className="message-input-button">
-        <FormInput
-          className="message-input"
-          label="Content"
-          value={state.content}
-          onChange={(evt) =>
-            stateSet({
-              ...state,
-              content: evt.target.value,
-            })
-          }
-          onKeyUp={(evt) => {
-            if (evt.keyCode === 13) {
-              onSend();
-            }
-          }}
-        />
-
-        <Button onClick={() => onSend()} style={{ width: "10%" }}>
-          Send
-        </Button>
-      </div>
+    <div className={`message ${messageClass}`}>
+      <p>{text}</p>
     </div>
   );
 };
 
-export default () => (
-  <ApolloProvider client={client}>
-    <Chat />
-  </ApolloProvider>
-);
+const Chat = () => {
+  const messagesRef = firestore
+    .collection("swipes")
+    .doc("ELVJr5eXsvHYl2RJHQ7D")
+    .collection("messages");
+  const query = messagesRef.orderBy("createdAt");
+
+  const [messages] = useCollectionData(query, { idField: "id" });
+  const [formValue, setFormValue] = useState("");
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+
+    const { uid } = auth.currentUser;
+
+    await messagesRef.add({
+      text: formValue,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      uid,
+    });
+
+    setFormValue("");
+  };
+
+  return (
+    <div>
+      <div className="chat-main">
+        {messages &&
+          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+      </div>
+
+      <form className="chat-form" onSubmit={sendMessage}>
+        <input
+          className="chat-input"
+          value={formValue}
+          onChange={(e) => setFormValue(e.target.value)}
+        />
+
+        <button className="chat-button" type="submit">
+          Send
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default Chat;

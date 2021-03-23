@@ -47,7 +47,6 @@ function App() {
             result={result}
             setResult={setResult}
           />
-          <Route path="/swipe" component={Swipe} />
           <Route path="/swipefirebase" component={SwipeFirebase} />
         </div>
       </Router>
