@@ -7,19 +7,19 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import { app, auth, firebaseAuth, firestore } from "../base";
 import { useState } from "react";
 
-const ChatMessage = (props) => {
-  const { text, uid } = props.message;
+const ChatMessage = ({ message }) => {
+  const { text, uid } = message;
 
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
 
   return (
-    <div className={`message ${messageClass}`}>
+    <div className={`message-${messageClass}`}>
       <p>{text}</p>
     </div>
   );
 };
 
-const Chat = () => {
+const Chat = ({ setLastMessage }) => {
   const messagesRef = firestore
     .collection("swipes")
     .doc("ELVJr5eXsvHYl2RJHQ7D")
@@ -39,6 +39,8 @@ const Chat = () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
     });
+
+    setLastMessage(formValue);
 
     setFormValue("");
   };

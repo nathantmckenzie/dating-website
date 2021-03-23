@@ -14,6 +14,7 @@ export default function SwipeFirebase() {
   const [details, setDetails] = useState();
   const [matchMessage, setMatchMessage] = useState(false);
   const [showChat, setShowChat] = useState(false);
+  const [lastMessage, setLastMessage] = useState("");
 
   const db = app.firestore();
   const currentEmail = firebaseAuth.currentUser.email;
@@ -125,6 +126,8 @@ export default function SwipeFirebase() {
               details={details}
               showChat={showChat}
               setShowChat={setShowChat}
+              lastMessage={lastMessage}
+              setLastMessage={setLastMessage}
             />
           </div>
           {!showChat ? (
@@ -142,8 +145,6 @@ export default function SwipeFirebase() {
                   <h4>{details[0].personality}</h4>
                 </TinderCard>
                 <div className="swipeButtons">
-                  {/*<button onClick={swipeLeft}>Swipe Left</button>
-              <button onClick={swipeRight}>Swipe Right</button>*/}
                   <IconButton className="swipeButtons__repeat">
                     <ReplayIcon fontSize="large" />
                   </IconButton>
@@ -169,7 +170,7 @@ export default function SwipeFirebase() {
               </div>
             </div>
           ) : (
-            <Chat />
+            <Chat setLastMessage={setLastMessage} />
           )}
         </div>
       ) : (

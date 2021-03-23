@@ -7,11 +7,10 @@ export default function Matches({
   details,
   showChat,
   setShowChat,
+  lastMessage,
 }) {
   const history = useHistory();
   const [showMatches, setShowMatches] = useState(true);
-
-  console.log("DETAILS", details);
 
   return (
     <div>
@@ -65,7 +64,7 @@ export default function Matches({
                 />
                 <div className="match-text">
                   <h3>{detail.firstName} </h3>
-                  <h5>Hey cutie</h5>
+                  <h5>{lastMessage}</h5>
                 </div>
               </div>
             );
