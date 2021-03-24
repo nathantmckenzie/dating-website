@@ -172,7 +172,7 @@ export default function SwipeFirebase() {
             </div>
           ) : (
             <div className="chat-profile">
-              <Chat className="chat-column" setLastMessage={setLastMessage} />
+              <Chat setLastMessage={setLastMessage} />
               <Profile className="profile-column" />
             </div>
           )}

@@ -46,7 +46,7 @@ const Chat = ({ setLastMessage }) => {
   };
 
   return (
-    <div div className="chat">
+    <div className="chat-column">
       <div className="chat-main">
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}

@@ -57,12 +57,16 @@ export default function Matches({
                 onClick={() => setShowChat(true)}
               >
                 <img
+                  onClick={(e) => console.log("E.TRAGET", e.target)}
                   src={detail.avatar}
                   width="100"
                   height="100"
                   className="message-picture"
                 />
-                <div className="match-text">
+                <div
+                  className="match-text"
+                  onClick={(e) => console.log("E.TRAGET", e.target)}
+                >
                   <h3>{detail.firstName} </h3>
                   <h5>{lastMessage}</h5>
                 </div>
