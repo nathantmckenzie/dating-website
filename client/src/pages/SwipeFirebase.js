@@ -9,6 +9,7 @@ import ReplayIcon from "@material-ui/icons/Replay";
 import StarRateIcon from "@material-ui/icons/StarRate";
 import FlashOnIcon from "@material-ui/icons/FlashOn";
 import IconButton from "@material-ui/core/IconButton";
+import noProfilePicture from "../pictures/no-profile-picture.png";
 import Chat from "./Chat";
 
 export default function SwipeFirebase() {
@@ -16,6 +17,7 @@ export default function SwipeFirebase() {
   const [matchMessage, setMatchMessage] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [lastMessage, setLastMessage] = useState("");
+  const [showProfile, setShowProfile] = useState();
 
   const db = app.firestore();
   const currentEmail = firebaseAuth.currentUser.email;
@@ -129,6 +131,8 @@ export default function SwipeFirebase() {
               setShowChat={setShowChat}
               lastMessage={lastMessage}
               setLastMessage={setLastMessage}
+              showProfile={showProfile}
+              setShowProfile={setShowProfile}
             />
           </div>
           {!showChat ? (
@@ -137,7 +141,9 @@ export default function SwipeFirebase() {
                 <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
                   {console.log("details", details)}
                   <img
-                    src={details[0].avatar}
+                    src={
+                      details[0].avatar ? details[0].avatar : noProfilePicture
+                    }
                     height="500"
                     width="500"
                     className="profile-picture"

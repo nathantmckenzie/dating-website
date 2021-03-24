@@ -210,11 +210,13 @@ vertical-align: middle;
 .main-page-chat {
   display: grid;
   grid-template-columns: 25% 75%;
+  height: 100%;
 }
 
 .main-page-swiping {
   display: grid;
   grid-template-columns: 25% 75%;
+  height: 100%;
 }
 
 .swiping {
@@ -236,6 +238,8 @@ vertical-align: middle;
 
 .matches {
   border-style: solid;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 .match-picture {
@@ -252,6 +256,7 @@ vertical-align: middle;
   margin-right: 5px;
   margin-top: 5px;
   position: relative;
+  overflow: scroll;
 }
 
 .match-picture-name:hover {
@@ -281,10 +286,11 @@ vertical-align: middle;
 .match-picture-message {
   display: flex;
   margin-top: 20px;
+  overflow-y: scroll;
 }
 
 .all-messages {
-  margin-top: 30px;
+  height: 100%;
 }
 
 .match-text {
@@ -307,6 +313,14 @@ vertical-align: middle;
 .matches-title-clicked, .messages-title-clicked {
   text-decoration: underline;
   text-decoration-color:#db1212;
+}
+
+.messages-title-clicked{
+  margin-left: 10px;
+}
+
+.matches-title-clicked{
+  margin-right: 10px;
 }
 
 
@@ -350,6 +364,7 @@ vertical-align: middle;
 .page-titles {
   display: flex;
   justify-content: column;
+  margin-left: 10px;
 }
 
 .message-input {
@@ -367,7 +382,6 @@ vertical-align: middle;
 
 .chat-main {
   padding: 10px;
-  height: 100vh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -376,7 +390,9 @@ vertical-align: middle;
 
 .chat-form {
   height: 10vh;
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  width: 52.5%;
   background-color: rgb(24, 23, 23);
   display: flex;
   font-size: 1.5rem;
@@ -400,6 +416,7 @@ vertical-align: middle;
 
 .chat-column, .profile-column {
   border-style: solid;
+  height: 100vh;
 }
 
 .chat-main::-webkit-scrollbar {
@@ -439,7 +456,7 @@ vertical-align: middle;
   .chat-profile {
     grid-template-columns: 100%;
   }
-  
+
   .main-page-chat {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -459,6 +476,11 @@ vertical-align: middle;
     grid-template-columns: 100%;
     height: 100vh;
   }
+}
+
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
 

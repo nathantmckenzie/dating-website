@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { app, auth, firebaseAuth, firestore } from "../base";
+import noProfilePicture from "../pictures/no-profile-picture.png";
 import Chat from "./Chat";
 
 export default function Matches({
@@ -8,9 +11,12 @@ export default function Matches({
   showChat,
   setShowChat,
   lastMessage,
+  showProfile,
+  setShowProfile,
 }) {
   const history = useHistory();
   const [showMatches, setShowMatches] = useState(true);
+  const { uid } = auth.currentUser;
 
   return (
     <div>
@@ -38,7 +44,7 @@ export default function Matches({
                 onClick={() => setShowChat(true)}
               >
                 <img
-                  src={detail.avatar}
+                  src={detail.avatar ? detail.avatar : noProfilePicture}
                   width="100"
                   height="100"
                   className="match-picture"
@@ -57,16 +63,15 @@ export default function Matches({
                 onClick={() => setShowChat(true)}
               >
                 <img
-                  onClick={(e) => console.log("E.TRAGET", e.target)}
-                  src={detail.avatar}
+                  onClick={() => {
+                    console.log("EE", detail.avatar);
+                  }}
+                  src={detail.avatar ? detail.avatar : noProfilePicture}
                   width="100"
                   height="100"
                   className="message-picture"
                 />
-                <div
-                  className="match-text"
-                  onClick={(e) => console.log("E.TRAGET", e.target)}
-                >
+                <div className="match-text">
                   <h3>{detail.firstName} </h3>
                   <h5>{lastMessage}</h5>
                 </div>

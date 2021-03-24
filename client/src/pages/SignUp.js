@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import { app, firebaseAuth } from "../base";
+import { app, firebaseAuth, auth } from "../base";
 
 export default function Signup() {
   const firstNameRef = useRef();
@@ -14,6 +14,7 @@ export default function Signup() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const { uid } = auth.currentUser;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -30,7 +31,7 @@ export default function Signup() {
       await signup(emailRef.current.value, passwordRef.current.value);
       await db
         .collection("users")
-        .doc(emailRef.current.value)
+        .doc(uid)
         .set(
           {
             firstName: firstNameRef.current.value,
