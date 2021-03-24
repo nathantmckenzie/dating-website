@@ -207,15 +207,28 @@ vertical-align: middle;
 
 /*----------SWIPING-------------*/
 
-.main-page {
+.main-page-chat {
   display: grid;
-  grid-template-columns: 25% 50% 25%;
+  grid-template-columns: 25% 75%;
+}
+
+.main-page-swiping {
+  display: grid;
+  grid-template-columns: 25% 75%;
 }
 
 .swiping {
   border-style: solid;
 }
 
+.chat-profile {
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
+.chat-column {
+  border-style: solid;
+}
 
 .swipe-profile {
   margin-top: 10px;
@@ -386,12 +399,10 @@ vertical-align: middle;
 .chat-main {
   padding: 10px;
   height: 100vh;
-  width: 66vw;
   margin: -11vh 0 10vh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  position: fixed;
 }
 
 .chat-main::-webkit-scrollbar {
@@ -419,3 +430,45 @@ vertical-align: middle;
   position: relative;
   max-width: 320px;
 }
+
+@media screen and (max-width:1000px) {
+  .matches, .chat-column {
+    width:100%; /* The width is 100%, when the viewport is 800px or smaller */
+  }
+  .profile-column {
+    display: none;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width:550px) {
+    .column-1 {
+      width:100%; /* The width is 100%, when the viewport is 800px or smaller */
+    }
+    .column-1, .column-3 {
+      display: none;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 100%;
+      height: 100vh;
+    }
+  }
+
+
+  @media screen and (max-height:400px) {
+
+    .row-1__column-1 {
+        background-color: pink;
+      }
+
+    .row-2__column-1 {
+        background-color: purple;
+        height: 30px;
+        position: fixed;
+      }
+  }

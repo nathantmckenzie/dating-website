@@ -116,7 +116,7 @@ export default function SwipeFirebase() {
   return (
     <>
       {details ? (
-        <div className="main-page">
+        <div className={showChat ? "main-page-chat" : "main-page-swiping"}>
           <div class="matches">
             {showChat ? (
               <button onClick={() => setShowChat(!showChat)}>
@@ -171,7 +171,7 @@ export default function SwipeFirebase() {
               </div>
             </div>
           ) : (
-            <div>
+            <div className="chat-profile">
               <Chat className="chat-column" setLastMessage={setLastMessage} />
               <Profile className="profile-column" />
             </div>
