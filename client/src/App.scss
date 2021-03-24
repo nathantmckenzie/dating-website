@@ -226,9 +226,6 @@ vertical-align: middle;
   grid-template-columns: 70% 30%;
 }
 
-.chat-column {
-  border-style: solid;
-}
 
 .swipe-profile {
   margin-top: 10px;
@@ -368,6 +365,15 @@ vertical-align: middle;
 
 /*--------CHAT------------*/
 
+.chat-main {
+  padding: 10px;
+  height: 100vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+
 .chat-form {
   height: 10vh;
   position: relative;
@@ -375,8 +381,6 @@ vertical-align: middle;
   display: flex;
   font-size: 1.5rem;
 }
-
-
 
 .chat-input {
   line-height: 1.5;
@@ -394,12 +398,8 @@ vertical-align: middle;
   width: 100px;
 }
 
-.chat-main {
-  padding: 10px;
-  height: 100vh;
-  overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
+.chat-column, .profile-column {
+  border-style: solid;
 }
 
 .chat-main::-webkit-scrollbar {
@@ -435,6 +435,11 @@ vertical-align: middle;
   .profile-column {
     display: none;
   }
+
+  .chat-profile {
+    grid-template-columns: 100%;
+  }
+  
   .main-page-chat {
     display: grid;
     grid-template-columns: 50% 50%;
