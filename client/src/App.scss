@@ -1,7 +1,10 @@
 * {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 0;
 }
+
+
+
+/*----------PERSONALITY QUIZ-------------*/
 
 .btn-circle {
   width: 30px;
@@ -202,11 +205,27 @@ margin-right: 20px;
 vertical-align: middle;
 }
 
+/*----------SWIPING-------------*/
+
+.main-page {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+}
+
+.swiping {
+  border-style: solid;
+}
+
+
 .swipe-profile {
   margin-top: 10px;
   border-width: 100%;
   display: grid;
   justify-content: center;
+}
+
+.matches {
+  border-style: solid;
 }
 
 .match-picture {
@@ -236,7 +255,8 @@ vertical-align: middle;
 .all-matches {
   display: grid;
   grid-template-columns: repeat(3, auto);
-  margin-left: 20px;
+  margin-left: 0px;
+  height: 100%;
 }
 
 .profile-picture {
@@ -316,10 +336,6 @@ vertical-align: middle;
   color: #915dd1 !important;
 }
 
-.main-page {
-  display: grid;
-  grid-template-columns: 30% 60%;
-}
 
 .page-titles {
   display: flex;
@@ -369,11 +385,13 @@ vertical-align: middle;
 
 .chat-main {
   padding: 10px;
-  height: 80vh;
-  margin: 10vh 0 10vh;
+  height: 100vh;
+  width: 66vw;
+  margin: -11vh 0 10vh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  position: fixed;
 }
 
 .chat-main::-webkit-scrollbar {
@@ -381,11 +399,11 @@ vertical-align: middle;
 }
 
 .chat-main::-webkit-scrollbar-track {
-  background: #1e1e24;
+  background: black;
 }
 
 .chat-main::-webkit-scrollbar-thumb {
-  background: #6649b8;
+  background: black;
 }
 
 .message-sent {
@@ -393,8 +411,7 @@ vertical-align: middle;
   padding: 8px 15px;
   margin-top: 5px;
   margin-bottom: 5px;
-  display: flex;
-  justify-content: center;
+  display: inline-block;
   color: white;
   margin-left: 65%;
   background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);

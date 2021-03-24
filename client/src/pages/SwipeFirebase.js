@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TinderCard from "react-tinder-card";
 import { app, firebaseAuth } from "../base";
 import Matches from "./Matches";
+import Profile from "./Profile";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CloseIcon from "@material-ui/icons/Close";
 import ReplayIcon from "@material-ui/icons/Replay";
@@ -170,7 +171,10 @@ export default function SwipeFirebase() {
               </div>
             </div>
           ) : (
-            <Chat setLastMessage={setLastMessage} />
+            <div>
+              <Chat className="chat-column" setLastMessage={setLastMessage} />
+              <Profile className="profile-column" />
+            </div>
           )}
         </div>
       ) : (
