@@ -14,7 +14,7 @@ export default function Signup() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const { uid } = auth.currentUser;
+  const currentUid = firebaseAuth.currentUser.uid;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -31,7 +31,7 @@ export default function Signup() {
       await signup(emailRef.current.value, passwordRef.current.value);
       await db
         .collection("users")
-        .doc(uid)
+        .doc(currentUid)
         .set(
           {
             firstName: firstNameRef.current.value,

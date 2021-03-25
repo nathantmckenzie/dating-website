@@ -8,6 +8,7 @@ function PhotoUpload() {
 
   const db = app.firestore();
   const current = firebaseAuth.currentUser.email;
+  const currentUid = firebaseAuth.currentUser.uid;
 
   const onFileChange = async (e) => {
     const file = e.target.files[0];
@@ -27,6 +28,7 @@ function PhotoUpload() {
     await db.collection("users").doc(current).set(
       {
         avatar: fileUrl,
+        uid: currentUid,
       },
       { merge: true }
     );

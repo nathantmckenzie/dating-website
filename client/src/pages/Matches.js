@@ -12,7 +12,7 @@ export default function Matches({
   setShowChat,
   lastMessage,
   showProfile,
-  setShowProfile,
+  setShowProfileUID,
 }) {
   const history = useHistory();
   const [showMatches, setShowMatches] = useState(true);
@@ -38,11 +38,19 @@ export default function Matches({
       {showMatches ? (
         <div className="all-matches" pre>
           {details.map((detail) => {
+            {
+              var onClickMatch = () => {
+                setShowChat(true);
+                setShowProfileUID(detail.uid);
+              };
+            }
             return (
               <div
+                key={detail.uid}
                 className="match-picture-name"
-                onClick={() => setShowChat(true)}
+                onClick={onClickMatch}
               >
+                {console.log("DETAIL", detail)}
                 <img
                   src={detail.avatar ? detail.avatar : noProfilePicture}
                   width="100"
@@ -59,6 +67,7 @@ export default function Matches({
           {details.map((detail) => {
             return (
               <div
+                key={detail.uid}
                 className="match-picture-message"
                 onClick={() => setShowChat(true)}
               >

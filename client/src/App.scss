@@ -221,6 +221,7 @@ vertical-align: middle;
 
 .swiping {
   border-style: solid;
+  background-color:	#f8f8ff;
 }
 
 .chat-profile {
@@ -408,6 +409,10 @@ vertical-align: middle;
   width: 100%;
 }
 
+.chat-column {
+  background-color: #f8f8ff;
+}
+
 .chat-button {
   background-color:black;
   color: white;
@@ -474,6 +479,19 @@ vertical-align: middle;
   .main-page-chat {
     display: grid;
     grid-template-columns: 100%;
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width:1000px) {
+  .swiping {
+    width:100%; 
+  }
+  .matches {
+    display: none;
+  }
+  .main-page-chat {
+    display: grid;
     height: 100vh;
   }
 }

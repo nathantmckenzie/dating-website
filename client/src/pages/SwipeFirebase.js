@@ -17,7 +17,7 @@ export default function SwipeFirebase() {
   const [matchMessage, setMatchMessage] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [lastMessage, setLastMessage] = useState("");
-  const [showProfile, setShowProfile] = useState();
+  const [showProfileUID, setShowProfileUID] = useState();
 
   const db = app.firestore();
   const currentEmail = firebaseAuth.currentUser.email;
@@ -92,7 +92,7 @@ export default function SwipeFirebase() {
     {
       /*db.collection("swipes")
       .where("by_user", "==", details[0].firstName)
-      .where("swipe_right", "==", true)
+      .where("swipe_ridght", "==", true)
       .where("to_user", "==", currentEmail)
       .then(console.log("LET'S GO"))
       .then(() => {
@@ -131,8 +131,8 @@ export default function SwipeFirebase() {
               setShowChat={setShowChat}
               lastMessage={lastMessage}
               setLastMessage={setLastMessage}
-              showProfile={showProfile}
-              setShowProfile={setShowProfile}
+              showProfileUID={showProfileUID}
+              setShowProfileUID={setShowProfileUID}
             />
           </div>
           {!showChat ? (
@@ -179,7 +179,11 @@ export default function SwipeFirebase() {
           ) : (
             <div className="chat-profile">
               <Chat setLastMessage={setLastMessage} />
-              <Profile className="profile-column" />
+              <Profile
+                details={details}
+                showProfileUID={showProfileUID}
+                className="profile-column"
+              />
             </div>
           )}
         </div>
