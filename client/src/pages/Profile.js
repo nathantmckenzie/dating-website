@@ -19,10 +19,11 @@ export default function Profile({ showProfileUID, details }) {
       {profile ? (
         <>
           {console.log("FILTERED", filtered)}
-          Profile {console.log("PROFILE", profile)}
+          {console.log("PROFILE", profile)}
           <img src={profile.avatar} width="100%" height="400" />
           <h2>{profile.firstName}</h2>
-          <div>{profile.personality}</div>
+          <h4>{profile.personality}</h4>
+          <div>{profile.bio}</div>
         </>
       ) : null}
     </div>

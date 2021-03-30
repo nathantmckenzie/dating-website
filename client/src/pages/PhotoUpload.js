@@ -5,6 +5,7 @@ function PhotoUpload() {
   const [fileUrl, setFileUrl] = React.useState(null);
   const [users, setUsers] = useState([]);
   const [test, setTest] = useState([]);
+  const [bio, setBio] = useState();
 
   const db = app.firestore();
   const current = firebaseAuth.currentUser.email;
@@ -29,6 +30,7 @@ function PhotoUpload() {
       {
         avatar: fileUrl,
         uid: currentUid,
+        bio: bio,
       },
       { merge: true }
     );
@@ -56,6 +58,14 @@ function PhotoUpload() {
       <form onSubmit={onSubmit}>
         <input type="file" onChange={onFileChange} />
         <input type="text" name="username" placeholder="NAME" />
+        <br />
+        <textarea
+          type="text"
+          name="bio"
+          placeholder="bio"
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+        />
         <button>Submit</button>
       </form>
       <ul>
