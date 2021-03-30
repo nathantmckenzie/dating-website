@@ -386,6 +386,7 @@ vertical-align: middle;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 
@@ -407,10 +408,12 @@ vertical-align: middle;
   outline: none;
   border: none;
   width: 100%;
+  padding: 10px;
 }
 
 .chat-column {
   background-color: #f8f8ff;
+  height: 100%;
 }
 
 .chat-button {

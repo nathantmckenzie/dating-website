@@ -5,7 +5,7 @@ import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { app, auth, firebaseAuth, firestore } from "../base";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const ChatMessage = ({ message }) => {
   const { text, uid } = message;
@@ -28,21 +28,26 @@ const Chat = ({ setLastMessage }) => {
 
   const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
+  const dummy = useRef();
 
   const sendMessage = async (e) => {
     e.preventDefault();
 
     const { uid } = auth.currentUser;
 
-    await messagesRef.add({
-      text: formValue,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid,
-    });
+    if (formValue.length > 0) {
+      await messagesRef.add({
+        text: formValue,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        uid,
+      });
 
-    setLastMessage(formValue);
+      setLastMessage(formValue);
 
-    setFormValue("");
+      setFormValue("");
+
+      dummy.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -50,6 +55,8 @@ const Chat = ({ setLastMessage }) => {
       <div className="chat-main">
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+
+        <div ref={dummy}></div>
       </div>
 
       <form className="chat-form" onSubmit={sendMessage}>
