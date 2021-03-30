@@ -451,41 +451,41 @@ vertical-align: middle;
 }
 
 @media screen and (max-width:1000px) {
-  .matches, .chat-column {
-    width:100%; 
+  .profile-column{
+    width: 100%; 
   }
-  .profile-column {
+  .matches {
     display: none;
   }
-
-  .chat-profile {
-    grid-template-columns: 100%;
+  .chat-form {
+    width: 70%;
   }
 
   .main-page-chat {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 100%;
     height: 100vh;
   }
 }
 
 @media screen and (max-width:650px) {
   .chat-column {
-    width:100%; 
+    width:100vw; 
   }
   .matches, .profile-column {
     display: none;
   }
-  .main-page-chat {
-    display: grid;
-    grid-template-columns: 100%;
-    height: 100vh;
+  .chat-form {
+    width: 100%;
+    display: flex;
   }
+
 }
 
 @media screen and (max-width:1000px) {
   .swiping {
     width:100vw; 
+    height: 100vh;
   }
   .matches {
     display: none;
