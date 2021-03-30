@@ -454,6 +454,25 @@ vertical-align: middle;
   justify-content: flex-end;
 }
 
+
+.message-sent:hover {
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: white;
+  margin-left: 65%;
+  background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+  background-attachment: fixed;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.timesent-messagesent {
+  display: contents;
+}
+
 @media screen and (max-width:1000px) {
   .profile-column{
     width: 100%; 

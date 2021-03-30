@@ -8,13 +8,29 @@ import { app, auth, firebaseAuth, firestore } from "../base";
 import { useState, useRef } from "react";
 
 const ChatMessage = ({ message }) => {
-  const { text, uid } = message;
+  const { text, uid, createdAt } = message;
 
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
 
+  function toDateTime(secs) {
+    var t = new Date(secs * 1000).toISOString().substr(11, 5);
+    return t;
+  }
+
+  function convertToPST(t) {
+    let hour = parseInt(t.slice(0, 2)) - 7;
+    let minutes = t.slice(2);
+    if (hour > 11) {
+      return (hour - 12).toString() + minutes + " PM";
+    } else {
+      return hour.toString() + minutes + " AM";
+    }
+  }
+
   return (
-    <div className={`message-${messageClass}`}>
-      <p>{text}</p>
+    <div className="timesent-messagesent">
+      <p>{convertToPST(toDateTime(createdAt))}</p>
+      <p className={`message-${messageClass}`}>{text}</p>
     </div>
   );
 };
