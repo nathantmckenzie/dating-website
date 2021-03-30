@@ -22,7 +22,7 @@ const ChatMessage = ({ message }) => {
 const Chat = ({ setLastMessage }) => {
   const messagesRef = firestore
     .collection("swipes")
-    .doc("ELVJr5eXsvHYl2RJHQ7D")
+    .doc("31jExSMfFwTwzYb0AFk0")
     .collection("messages");
   const query = messagesRef.orderBy("createdAt");
 
@@ -45,9 +45,8 @@ const Chat = ({ setLastMessage }) => {
       setLastMessage(formValue);
 
       setFormValue("");
-
-      dummy.current.scrollIntoView({ behavior: "smooth" });
     }
+    dummy.current.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -55,7 +54,6 @@ const Chat = ({ setLastMessage }) => {
       <div className="chat-main">
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
-
         <div ref={dummy}></div>
       </div>
 
