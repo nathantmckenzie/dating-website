@@ -3,6 +3,7 @@ import TinderCard from "react-tinder-card";
 import { app, firebaseAuth } from "../base";
 import Matches from "./Matches";
 import Profile from "./Profile";
+import Settings from "./Settings";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CloseIcon from "@material-ui/icons/Close";
 import ReplayIcon from "@material-ui/icons/Replay";
@@ -125,6 +126,7 @@ export default function SwipeFirebase() {
                 Keep Swiping
               </button>
             ) : null}
+            <Settings details={details} />
             <Matches
               details={details}
               showChat={showChat}

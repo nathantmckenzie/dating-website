@@ -4,6 +4,7 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import { app, auth, firebaseAuth, firestore } from "../base";
 import noProfilePicture from "../pictures/no-profile-picture.png";
 import Chat from "./Chat";
+import Settings from "./Settings";
 
 export default function Matches({
   possibleMatches,

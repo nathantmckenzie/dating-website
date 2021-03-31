@@ -17,6 +17,11 @@ const ChatMessage = ({ message }) => {
     return t;
   }
 
+  function toFullDateTime(secs) {
+    var t = new Date(secs * 1000).toISOString().substr(5, 5);
+    return t;
+  }
+
   function convertToPST(t) {
     let hour = parseInt(t.slice(0, 2)) - 7;
     let minutes = t.slice(2);
@@ -29,7 +34,8 @@ const ChatMessage = ({ message }) => {
 
   return (
     <div className="timesent-messagesent">
-      <p>{convertToPST(toDateTime(createdAt))}</p>
+      <div className="date-sent">{toFullDateTime(createdAt)}-2021</div>
+      <p className="time-sent">{convertToPST(toDateTime(createdAt))}</p>
       <p className={`message-${messageClass}`}>{text}</p>
     </div>
   );

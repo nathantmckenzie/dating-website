@@ -247,8 +247,29 @@ vertical-align: middle;
   border-radius: 5%;
 }
 
-.message-picture {
+.message-picture{
   border-radius: 50%;
+}
+
+.settings-picture {
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-color: white;
+}
+
+.settings-navbar {
+  background-color:  #F07470;
+  height: 70px;
+  display: flex;
+}
+
+.my-profile-text {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: x-large;
+  margin-left: 10px;
 }
 
 .match-picture-name {
@@ -288,6 +309,7 @@ vertical-align: middle;
   display: flex;
   margin-top: 20px;
   overflow-y: scroll;
+  margin-left: 10px;
 }
 
 .all-messages {
@@ -472,6 +494,54 @@ vertical-align: middle;
 .timesent-messagesent {
   display: contents;
 }
+
+.report-unmatch {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  height: 10vh;
+}
+
+.report-button {
+  width: 170px;
+  height: 10vh;
+}
+
+.report-button:hover {
+  width: 170px;
+  height: 10vh;
+  background-color: red;
+}
+
+.unmatch-button {
+  width: 170px;
+  height: 10vh;
+}
+
+.unmatch-button:hover {
+  width: 170px;
+  height: 10vh;
+  background-color: red;
+}
+
+.match-picture-message:hover {
+  background-color: #add8e6;
+}
+
+.profile-info {
+  margin-left: 10px;
+}
+
+.date-sent {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+
+
+
 
 @media screen and (max-width:1000px) {
   .profile-column{

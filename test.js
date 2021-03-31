@@ -4,7 +4,7 @@ function convertToPST(t) {
   if (hour > 11) {
     return (hour - 12).toString() + minutes + " PM";
   } else {
-    return hour.toString() + minutes + " AM";
+    return (12 - hour).toString() + minutes + " AM";
   }
 }
 

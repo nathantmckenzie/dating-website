@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { app, firebaseAuth } from "../base";
+import firebase from "firebase";
 
 function PhotoUpload() {
   const [fileUrl, setFileUrl] = React.useState(null);
+  const [photos, setPhotos] = useState([]);
   const [users, setUsers] = useState([]);
   const [test, setTest] = useState([]);
   const [bio, setBio] = useState();
@@ -26,14 +28,18 @@ function PhotoUpload() {
     if (!username || !fileUrl) {
       return;
     }
-    await db.collection("users").doc(current).set(
-      {
-        avatar: fileUrl,
-        uid: currentUid,
-        bio: bio,
-      },
-      { merge: true }
-    );
+    await db
+      .collection("users")
+      .doc(current)
+      .set(
+        {
+          // avatar: [fileUrl],
+          avatar: firebase.firestore.FieldValue.arrayUnion(fileUrl),
+          uid: currentUid,
+          bio: bio,
+        },
+        { merge: true }
+      );
     window.location.reload();
   };
 

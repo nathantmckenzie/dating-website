@@ -3,6 +3,7 @@ import { app, firebaseAuth } from "../base";
 
 export default function Profile({ showProfileUID, details }) {
   const [profile, setProfile] = useState();
+  const [currentPicture, setCurrentPicture] = useState();
   const db = app.firestore();
   let firebaseData;
 
@@ -14,16 +15,29 @@ export default function Profile({ showProfileUID, details }) {
     setProfile(filtered);
   }, []);
 
+  function nextPicture(pics) {
+    for (let i = 0; i < pics.length; i++) {
+      return pics[i];
+    }
+  }
+
   return (
     <div className="profile-column">
       {profile ? (
         <>
           {console.log("FILTERED", filtered)}
-          {console.log("PROFILE", profile)}
-          <img src={profile.avatar} width="100%" height="400" />
-          <h2>{profile.firstName}</h2>
-          <h4>{profile.personality}</h4>
-          <div>{profile.bio}</div>
+          <img src={nextPicture(profile.avatar)} width="100%" height="400" />
+          <button>previous pics</button>
+          <button onClick={nextPicture(profile.avatar)}>more pics</button>
+          <div className="profile-info">
+            <h2>{profile.firstName}</h2>
+            <h4>{profile.personality}</h4>
+            <div>{profile.bio}</div>
+          </div>
+          <div className="report-unmatch">
+            <button className="unmatch-button">UNMATCH</button>
+            <button className="report-button">REPORT</button>
+          </div>
         </>
       ) : null}
     </div>
