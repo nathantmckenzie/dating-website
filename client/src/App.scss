@@ -538,10 +538,54 @@ vertical-align: middle;
   width: 100%;
 }
 
+/*-------SETTINGS-------------*/
+
+.settings-container {
+  display: grid;
+  grid-template-columns: 25% 75%;
+}
+
+.settings-sidebar {
+  border-style: solid;
+  height: 100vh;
+}
+
+.picture-bio-settings {
+  border-style: solid;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.picture-settings {
+  border-radius: 3%;
+}
+
+.settings-name {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 10px;
+}
+
+.settings-card {
+  width: 450px;
+  height: 650px;
+  border-style: solid;
+  margin-top: 30px;
+  border-radius: 3%;
+}
+
+.edit-info-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
 
 
 
 
+
+/*-------RESPONSIVE DESIGN------------*/
 
 @media screen and (max-width:1000px) {
   .profile-column{

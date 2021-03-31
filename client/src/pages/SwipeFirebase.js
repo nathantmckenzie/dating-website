@@ -3,6 +3,7 @@ import TinderCard from "react-tinder-card";
 import { app, firebaseAuth } from "../base";
 import Matches from "./Matches";
 import Profile from "./Profile";
+import SettingsNavBar from "./SettingsNavBar";
 import Settings from "./Settings";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CloseIcon from "@material-ui/icons/Close";
@@ -19,6 +20,7 @@ export default function SwipeFirebase() {
   const [showChat, setShowChat] = useState(false);
   const [lastMessage, setLastMessage] = useState("");
   const [showProfileUID, setShowProfileUID] = useState();
+  const [showSettings, setShowSettings] = useState(false);
 
   const db = app.firestore();
   const currentEmail = firebaseAuth.currentUser.email;
@@ -119,76 +121,83 @@ export default function SwipeFirebase() {
   return (
     <>
       {details ? (
-        <div className={showChat ? "main-page-chat" : "main-page-swiping"}>
-          <div class="matches">
-            {showChat ? (
-              <button onClick={() => setShowChat(!showChat)}>
-                Keep Swiping
-              </button>
-            ) : null}
-            <Settings details={details} />
-            <Matches
-              details={details}
-              showChat={showChat}
-              setShowChat={setShowChat}
-              lastMessage={lastMessage}
-              setLastMessage={setLastMessage}
-              showProfileUID={showProfileUID}
-              setShowProfileUID={setShowProfileUID}
-            />
-          </div>
-          {!showChat ? (
-            <div className="swiping">
-              <div className="swipe-profile">
-                <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
-                  {console.log("details", details)}
-                  <img
-                    src={
-                      details[0].avatar ? details[0].avatar : noProfilePicture
-                    }
-                    height="500"
-                    width="500"
-                    className="profile-picture"
-                  />
-                  <h3>{details[0].firstName}</h3>
-                  <h4>{details[0].personality}</h4>
-                </TinderCard>
-                <div className="swipeButtons">
-                  <IconButton className="swipeButtons__repeat">
-                    <ReplayIcon fontSize="large" />
-                  </IconButton>
-                  <IconButton
-                    onClick={swipeLeft}
-                    className="swipeButtons__left"
-                  >
-                    <CloseIcon fontSize="large" />
-                  </IconButton>
-                  <IconButton className="swipeButtons__star">
-                    <StarRateIcon fontSize="large" />
-                  </IconButton>
-                  <IconButton
-                    onClick={swipeRight}
-                    className="swipeButtons__right"
-                  >
-                    <FavoriteIcon fontSize="large" />
-                  </IconButton>
-                  <IconButton className="swipeButtons__lightning">
-                    <FlashOnIcon fontSize="large" />
-                  </IconButton>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="chat-profile">
-              <Chat setLastMessage={setLastMessage} />
-              <Profile
+        !showSettings ? (
+          <div className={showChat ? "main-page-chat" : "main-page-swiping"}>
+            <div class="matches">
+              {showChat ? (
+                <button onClick={() => setShowChat(!showChat)}>
+                  Keep Swiping
+                </button>
+              ) : null}
+              <SettingsNavBar
                 details={details}
+                setShowSettings={setShowSettings}
+              />
+              <Matches
+                details={details}
+                showChat={showChat}
+                setShowChat={setShowChat}
+                lastMessage={lastMessage}
+                setLastMessage={setLastMessage}
                 showProfileUID={showProfileUID}
-                className="profile-column"
+                setShowProfileUID={setShowProfileUID}
               />
             </div>
-          )}
-        </div>
+            {!showChat ? (
+              <div className="swiping">
+                <div className="swipe-profile">
+                  <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
+                    {console.log("details", details)}
+                    <img
+                      src={
+                        details[0].avatar ? details[0].avatar : noProfilePicture
+                      }
+                      height="500"
+                      width="500"
+                      className="profile-picture"
+                    />
+                    <h3>{details[0].firstName}</h3>
+                    <h4>{details[0].personality}</h4>
+                  </TinderCard>
+                  <div className="swipeButtons">
+                    <IconButton className="swipeButtons__repeat">
+                      <ReplayIcon fontSize="large" />
+                    </IconButton>
+                    <IconButton
+                      onClick={swipeLeft}
+                      className="swipeButtons__left"
+                    >
+                      <CloseIcon fontSize="large" />
+                    </IconButton>
+                    <IconButton className="swipeButtons__star">
+                      <StarRateIcon fontSize="large" />
+                    </IconButton>
+                    <IconButton
+                      onClick={swipeRight}
+                      className="swipeButtons__right"
+                    >
+                      <FavoriteIcon fontSize="large" />
+                    </IconButton>
+                    <IconButton className="swipeButtons__lightning">
+                      <FlashOnIcon fontSize="large" />
+                    </IconButton>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="chat-profile">
+                <Chat setLastMessage={setLastMessage} />
+                <Profile
+                  details={details}
+                  showProfileUID={showProfileUID}
+                  className="profile-column"
+                />
+              </div>
+            )}
+          </div>
+        ) : (
+          <Settings details={details} />
+        )
       ) : (
         <div>Data loading</div>
       )}
