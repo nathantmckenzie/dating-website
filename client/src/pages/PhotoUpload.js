@@ -3,7 +3,7 @@ import { app, firebaseAuth } from "../base";
 import firebase from "firebase";
 
 function PhotoUpload() {
-  const [fileUrl, setFileUrl] = React.useState(null);
+  const [fileUrl, setFileUrl] = useState(null);
   const [photos, setPhotos] = useState([]);
   const [users, setUsers] = useState([]);
   const [test, setTest] = useState([]);
