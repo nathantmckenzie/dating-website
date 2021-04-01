@@ -58,15 +58,23 @@ export default function AddPhoto() {
     fetchUsers();
   }, []);
 
+  useEffect(() => {
+    console.log("new photoooo");
+  }, [fileUrl]);
+
   return (
     <div>
       <div className="picture-bio-settings">
         <div className="settings-card">
           <div className="select-photo-image">
-            <img src={selectPhoto} className="select-image-border-radius" />
             <form>
               <label>
-                Upload
+                <div>
+                  <img
+                    src={fileUrl ? fileUrl : selectPhoto}
+                    className="select-image-border-radius"
+                  />
+                </div>
                 <input
                   type="file"
                   onChange={onFileChange}

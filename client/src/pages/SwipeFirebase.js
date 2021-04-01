@@ -148,14 +148,18 @@ export default function SwipeFirebase() {
                 <div className="swipe-profile">
                   <TinderCard preventSwipe={["up", "down"]} onSwipe={onSwipe}>
                     {console.log("details", details)}
-                    <img
-                      src={
-                        details[0].avatar ? details[0].avatar : noProfilePicture
-                      }
-                      height="500"
-                      width="500"
-                      className="profile-picture"
-                    />
+                    <div className="overflow-hidden-test">
+                      <img
+                        src={
+                          details[0].avatar
+                            ? details[0].avatar
+                            : noProfilePicture
+                        }
+                        height="500"
+                        width="500"
+                        className="profile-picture"
+                      />
+                    </div>
                     <h3>{details[0].firstName}</h3>
                     <h4>{details[0].personality}</h4>
                   </TinderCard>

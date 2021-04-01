@@ -71,6 +71,16 @@ const Chat = ({ setLastMessage }) => {
     dummy.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(() => {
+    document
+      .getElementsByClassName("chat-main")[0]
+      .scrollTo(
+        0,
+        document.getElementsByClassName("chat-main")[0].scrollHeight
+      );
+    console.log(document.getElementsByClassName("chat-main")[0].scrollHeight);
+  }, [messages]);
+
   return (
     <div className="chat-column">
       <div className="chat-main">

@@ -292,12 +292,18 @@ vertical-align: middle;
 .all-matches {
   display: grid;
   grid-template-columns: repeat(auto-fill, 110px);
-  margin-left: 0px;
+  margin-left: 11px;
   height: 100%;
+}
+
+.overflow-hidden-test {
+  display: inline-block;
+  overflow: hidden;
 }
 
 .profile-picture {
   border-radius: 3%;
+  overflow: hidden;
 }
 
 .swipe-buttons {
@@ -621,10 +627,14 @@ vertical-align: middle;
   display: flex;
   justify-content: center;
   margin-top: 40px;
+  margin-left: 30px;
 }
 
 .select-image-border-radius {
   border-radius: 5%;
+  width: 300px;
+  height: 500px;
+  overflow: hidden;
 }
 
 .add-image-form {
