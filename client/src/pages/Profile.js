@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { app, firebaseAuth } from "../base";
+import { app } from "../base";
 
 export default function Profile({ showProfileUID, details }) {
   const [profile, setProfile] = useState();
   const [currentPicture, setCurrentPicture] = useState();
   const db = app.firestore();
-  let firebaseData;
 
   let filtered = details.filter(
     (detail) => detail.uid === "a484KBMpC4O1m3ICjeBnBcboEjc2"
@@ -15,10 +14,10 @@ export default function Profile({ showProfileUID, details }) {
     setProfile(filtered);
   }, []);
 
+  let i = 0;
   function nextPicture(pics) {
-    for (let i = 0; i < pics.length; i++) {
-      return pics[i];
-    }
+    setCurrentPicture(pics[i]);
+    i++;
   }
 
   return (
@@ -26,9 +25,9 @@ export default function Profile({ showProfileUID, details }) {
       {profile ? (
         <>
           {console.log("FILTERED", filtered)}
-          <img src={nextPicture(profile.avatar)} width="100%" height="400" />
+          <img src={currentPicture} width="100%" height="400" />
           <button>previous pics</button>
-          <button onClick={nextPicture(profile.avatar)}>more pics</button>
+          <button onClick={() => nextPicture(profile.avatar)}>more pics</button>
           <div className="profile-info">
             <h2>{profile.firstName}</h2>
             <h4>{profile.personality}</h4>

@@ -124,15 +124,15 @@ export default function SwipeFirebase() {
         !showSettings ? (
           <div className={showChat ? "main-page-chat" : "main-page-swiping"}>
             <div class="matches">
+              <SettingsNavBar
+                details={details}
+                setShowSettings={setShowSettings}
+              />
               {showChat ? (
                 <button onClick={() => setShowChat(!showChat)}>
                   Keep Swiping
                 </button>
               ) : null}
-              <SettingsNavBar
-                details={details}
-                setShowSettings={setShowSettings}
-              />
               <Matches
                 details={details}
                 showChat={showChat}
