@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function PictureSettings({ details }) {
+export default function PictureSettings({ details, setEditInfo }) {
   const [profile, setProfile] = useState();
 
   let filtered = details.filter(
@@ -25,7 +25,7 @@ export default function PictureSettings({ details }) {
           </div>
           <h2 className="settings-name">{profile.firstName}</h2>
           <div className="edit-info-button">
-            <button>Edit Info</button>
+            <button onClick={() => setEditInfo(true)}>Edit Info</button>
           </div>
         </div>
       ) : null}

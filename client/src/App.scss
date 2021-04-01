@@ -573,12 +573,25 @@ vertical-align: middle;
   border-style: solid;
   margin-top: 30px;
   border-radius: 3%;
+  overflow-y: scroll;
 }
 
 .edit-info-button {
   display: flex;
   justify-content: center;
   margin-top: 80px;
+}
+
+.add-media-button {
+  display: flex;
+  justify-content: center;
+}
+
+.all-pictures-settings {
+  height: 400px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  margin: 10px;
 }
 
 

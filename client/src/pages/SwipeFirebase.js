@@ -196,7 +196,7 @@ export default function SwipeFirebase() {
             )}
           </div>
         ) : (
-          <Settings details={details} />
+          <Settings details={details} setShowSettings={setShowSettings} />
         )
       ) : (
         <div>Data loading</div>

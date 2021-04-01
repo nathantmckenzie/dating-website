@@ -20,9 +20,12 @@ export default function SettingsNavBar({ details, setShowSettings }) {
             className="settings-picture"
             width="50"
             height="50"
-            onClick={setShowSettings(true)}
+            onClick={() => setShowSettings(true)}
           />
-          <div className="my-profile-text" onClick={setShowSettings(true)}>
+          <div
+            className="my-profile-text"
+            onClick={() => setShowSettings(true)}
+          >
             My Profile
           </div>
         </div>
