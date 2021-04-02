@@ -36,8 +36,10 @@ const ChatMessage = ({ message }) => {
   return (
     <div className="timesent-messagesent">
       <div className="date-sent">{toFullDateTime(createdAt)}-2021</div>
-      <div className="time-sent">{convertToPST(toDateTime(createdAt))}</div>
-      <p className={`message-${messageClass}`}>{text}</p>
+      <div className="time-and-message">
+        <div className="time-sent">{convertToPST(toDateTime(createdAt))}</div>
+        <p className={`message-${messageClass}`}>{text}</p>
+      </div>
     </div>
   );
 };
