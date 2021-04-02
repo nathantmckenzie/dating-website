@@ -155,8 +155,6 @@ export default function SwipeFirebase() {
                             ? details[0].avatar
                             : noProfilePicture
                         }
-                        height="500"
-                        width="500"
                         className="profile-picture"
                       />
                     </div>

@@ -52,39 +52,17 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
         <div className="settings-card">
           <div className="all-pictures-settings">
             <div>
-              <img
-                className="picture-settings"
-                src={profile.avatar[0]}
-                width="120"
-                height="170"
-              />
+              <img className="picture-settings" src={profile.avatar[0]} />
               <div className="delete-picture-button">
                 <HighlightOffIcon onClick={deletePicture} />
               </div>
             </div>
-            <img
-              className="picture-settings"
-              src={profile.avatar[1]}
-              width="120"
-              height="170"
-            />
-            <img
-              className="picture-settings"
-              src={profile.avatar[2]}
-              width="120"
-              height="170"
-            />
-            <img
-              className="picture-settings"
-              src={profile.avatar[3]}
-              width="120"
-              height="170"
-            />
+            <img className="picture-settings" src={profile.avatar[1]} />
+            <img className="picture-settings" src={profile.avatar[2]} />
+            <img className="picture-settings" src={profile.avatar[3]} />
             <img
               className="picture-settings"
               src={profile.avatar[4] ? profile.avatar[4] : <div>hi</div>}
-              width="120"
-              height="170"
             />
           </div>
           <div className="add-media-button">

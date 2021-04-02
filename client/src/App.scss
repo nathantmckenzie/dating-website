@@ -250,10 +250,16 @@ vertical-align: middle;
 
 .match-picture {
   border-radius: 5%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 .message-picture{
   border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 .settings-picture {
@@ -307,6 +313,9 @@ vertical-align: middle;
 }
 
 .profile-picture {
+  object-fit: cover;
+  width: 500px;
+  height: 500px;
   border-radius: 3%;
   overflow: hidden;
 }
@@ -569,6 +578,9 @@ vertical-align: middle;
 
 .picture-settings {
   border-radius: 3%;
+  width: 120px;
+  height: 170px;
+  object-fit: cover;
 }
 
 .settings-name {

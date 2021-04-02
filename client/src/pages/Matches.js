@@ -54,8 +54,6 @@ export default function Matches({
                 {console.log("DETAIL", detail)}
                 <img
                   src={detail.avatar ? detail.avatar : noProfilePicture}
-                  width="100"
-                  height="100"
                   className="match-picture"
                 />
                 <h4 className="match-name">{detail.firstName} </h4>
@@ -77,8 +75,6 @@ export default function Matches({
                     console.log("EE", detail.avatar);
                   }}
                   src={detail.avatar ? detail.avatar : noProfilePicture}
-                  width="100"
-                  height="100"
                   className="message-picture"
                 />
                 <div className="match-text">
