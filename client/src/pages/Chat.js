@@ -9,6 +9,7 @@ import { useState, useRef } from "react";
 
 const ChatMessage = ({ message }) => {
   const { text, uid, createdAt } = message;
+  const [currentDate, setCurrentDate] = useState();
 
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
 
@@ -35,7 +36,7 @@ const ChatMessage = ({ message }) => {
   return (
     <div className="timesent-messagesent">
       <div className="date-sent">{toFullDateTime(createdAt)}-2021</div>
-      <p className="time-sent">{convertToPST(toDateTime(createdAt))}</p>
+      <div className="time-sent">{convertToPST(toDateTime(createdAt))}</div>
       <p className={`message-${messageClass}`}>{text}</p>
     </div>
   );

@@ -23,9 +23,7 @@ export default function AddPhoto() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const username = e.target.username.value;
-    setTest([...test, fileUrl]);
-    if (!username || !fileUrl) {
+    if (!fileUrl) {
       return;
     }
     await db
@@ -35,8 +33,6 @@ export default function AddPhoto() {
         {
           // avatar: [fileUrl],
           avatar: firebase.firestore.FieldValue.arrayUnion(fileUrl),
-          uid: currentUid,
-          bio: bio,
         },
         { merge: true }
       );
@@ -66,13 +62,19 @@ export default function AddPhoto() {
     <div>
       <div className="picture-bio-settings">
         <div className="settings-card">
+          <div className="create-photo-div">
+            <h4 className="create-photo-title">Adjust</h4>
+            <h4 className="create-upload-button" onClick={onSubmit}>
+              Done
+            </h4>
+          </div>
           <div className="select-photo-image">
             <form>
               <label>
                 <div>
                   <img
                     src={fileUrl ? fileUrl : selectPhoto}
-                    className="select-image-border-radius"
+                    className="select-image"
                   />
                 </div>
                 <input
@@ -83,6 +85,7 @@ export default function AddPhoto() {
               </label>
             </form>
           </div>
+          <button>Zoom In</button>
         </div>
       </div>
     </div>

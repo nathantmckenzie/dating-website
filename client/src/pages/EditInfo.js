@@ -5,7 +5,7 @@ import firebase from "firebase";
 
 export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
   const [profile, setProfile] = useState();
-  const [bio, setBio] = useState(profile ? profile.bio : null);
+  const [bio, setBio] = useState();
 
   const db = app.firestore();
   const current = firebaseAuth.currentUser.email;
@@ -16,7 +16,11 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
 
   useEffect(() => {
     setProfile(filtered);
-  }, []);
+    // console.log("Profile.bio: ", profile.bio);
+    if (profile && profile.bio) {
+      setBio(profile.bio);
+    }
+  }, [filtered, profile]);
 
   const updateProfile = async (e) => {
     e.preventDefault();
@@ -89,7 +93,7 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
           <h4 className="bio-label">About {profile.firstName}</h4>
           <textarea
             className="bio-input"
-            value={profile.bio && bio}
+            value={bio}
             onChange={(e) => setBio(e.target.value)}
           ></textarea>
           <button onClick={updateProfile}>Save</button>

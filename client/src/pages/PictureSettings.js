@@ -24,6 +24,7 @@ export default function PictureSettings({ details, setEditInfo }) {
             />
           </div>
           <h2 className="settings-name">{profile.firstName}</h2>
+          <h5 className="settings-bio">{profile.bio}</h5>
           <div className="edit-info-button">
             <button onClick={() => setEditInfo(true)}>Edit Info</button>
           </div>
