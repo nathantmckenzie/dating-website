@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowBackIcon from "@material-ui/icons/ArrowBackIos";
 import { app } from "../base";
 
 export default function Profile({ showProfileUID, details }) {
@@ -39,30 +41,27 @@ export default function Profile({ showProfileUID, details }) {
     <div className="profile-column">
       {profile ? (
         <>
-          {console.log("AVATAR LENGTH", profile.avatar.length)}
-          <img src={currentPicture} className="profile-picture-rightside" />
-          <button
-            onClick={pictureNumber > 0 ? previousPicture : null}
-            className={
-              pictureNumber > 0
-                ? "previous-picture-button"
-                : "hide-previous-picture-button"
-            }
-          >
-            previous pics
-          </button>
-          <button
-            onClick={
-              pictureNumber < profile.avatar.length - 1 ? nextPicture : null
-            }
-            className={
-              pictureNumber < profile.avatar.length - 1
-                ? "next-picture-button"
-                : "hide-next-picture-button"
-            }
-          >
-            more pics
-          </button>
+          <div className="profile-picture-previous-next-buttons-container">
+            <img src={currentPicture} className="profile-picture-rightside" />
+            <ArrowBackIcon
+              onClick={pictureNumber > 0 ? previousPicture : null}
+              className={
+                pictureNumber > 0
+                  ? "previous-picture-button"
+                  : "hide-previous-picture-button"
+              }
+            />
+            <ArrowForwardIcon
+              onClick={
+                pictureNumber < profile.avatar.length - 1 ? nextPicture : null
+              }
+              className={
+                pictureNumber < profile.avatar.length - 1
+                  ? "next-picture-button"
+                  : "hide-next-picture-button"
+              }
+            />
+          </div>
           <div className="profile-info">
             <h2>{profile.firstName}</h2>
             <h4>{profile.personality}</h4>

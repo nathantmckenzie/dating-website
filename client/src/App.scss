@@ -610,6 +610,46 @@ vertical-align: middle;
   visibility: hidden;
 }
 
+.profile-picture-previous-next-buttons-container {
+ position: relative;
+}
+
+.profile-picture-previous-next-buttons-container .next-picture-button {
+  position: absolute;
+  top: 50%;
+  right: 3%;
+  color: white;
+  transform: scale(1.8);
+  visibility: hidden;
+}
+
+.profile-picture-previous-next-buttons-container .previous-picture-button {
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  color: white;
+  transform: scale(1.8);
+  visibility: hidden;
+}
+
+.profile-picture-previous-next-buttons-container:hover > .next-picture-button {
+  position: absolute;
+  top: 50%;
+  right: 3%;
+  color: white;
+  transform: scale(1.8);
+  visibility: visible;
+}
+
+.profile-picture-previous-next-buttons-container:hover > .previous-picture-button {
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  color: white;
+  transform: scale(1.8);
+  visibility: visible;
+}
+
 
 
 
