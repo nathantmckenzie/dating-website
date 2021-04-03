@@ -4,7 +4,7 @@ import { app } from "../base";
 export default function Profile({ showProfileUID, details }) {
   const [profile, setProfile] = useState();
   const [currentPicture, setCurrentPicture] = useState();
-  const [pictureNumber, setPictureNumber] = useState(1);
+  const [pictureNumber, setPictureNumber] = useState(0);
   const db = app.firestore();
 
   let filtered = details.filter(
@@ -21,16 +21,23 @@ export default function Profile({ showProfileUID, details }) {
     }
   }, [profile]);
 
-  function nextPicture(pics) {
-    setPictureNumber(pictureNumber + 1);
-    console.log("PICTURE NUMBER", pictureNumber);
-    setCurrentPicture(pics[pictureNumber]);
+  useEffect(() => {
+    if (profile) {
+      setCurrentPicture(profile.avatar[pictureNumber]);
+    }
+  }, [profile, pictureNumber]);
+
+  function nextPicture() {
+    //console.log("PICTURE NUMBER", pictureNumber);
+    setPictureNumber((prevState) => prevState + 1);
+    //console.log("PICTURE NUMBER", pictureNumber);
+    //setCurrentPicture(profile.avatar[pictureNumber]);
   }
 
-  function previousPicture(pics) {
-    setPictureNumber(pictureNumber - 1);
+  function previousPicture() {
+    setPictureNumber((prevState) => prevState - 1);
     console.log("PICTURE NUMBER", pictureNumber);
-    setCurrentPicture(pics[pictureNumber]);
+    //setCurrentPicture(profile.avatar[pictureNumber]);
   }
 
   return (
@@ -38,10 +45,8 @@ export default function Profile({ showProfileUID, details }) {
       {profile ? (
         <>
           <img src={currentPicture} className="profile-picture-rightside" />
-          <button onClick={() => previousPicture(profile.avatar)}>
-            previous pics
-          </button>
-          <button onClick={() => nextPicture(profile.avatar)}>more pics</button>
+          <button onClick={previousPicture}>previous pics</button>
+          <button onClick={nextPicture}>more pics</button>
           <div className="profile-info">
             <h2>{profile.firstName}</h2>
             <h4>{profile.personality}</h4>
