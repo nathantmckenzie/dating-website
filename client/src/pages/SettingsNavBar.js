@@ -18,8 +18,6 @@ export default function SettingsNavBar({ details, setShowSettings }) {
           <img
             src={profile.avatar[0]}
             className="settings-picture"
-            width="50"
-            height="50"
             onClick={() => setShowSettings(true)}
           />
           <div

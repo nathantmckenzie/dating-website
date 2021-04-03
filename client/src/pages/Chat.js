@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { app, auth, firebaseAuth, firestore } from "../base";
-import { useState, useRef } from "react";
 
 const ChatMessage = ({ message }) => {
   const { text, uid, createdAt } = message;
-  const [currentDate, setCurrentDate] = useState();
+  const [currentDate, setCurrentDate] = useState(null);
 
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
 
@@ -33,11 +32,18 @@ const ChatMessage = ({ message }) => {
     }
   }
 
+  useEffect(() => {
+    console.log("AYY", toFullDateTime(createdAt));
+    setCurrentDate(toFullDateTime(createdAt));
+  }, [toFullDateTime(createdAt)]);
+
   return (
     <div className="timesent-messagesent">
-      <div className="date-sent">{toFullDateTime(createdAt)}-2021</div>
-      <div className="time-and-message">
-        <div className="time-sent">{convertToPST(toDateTime(createdAt))}</div>
+      <div className="date-sent">{currentDate}-2021</div>
+      <div className={`time-and-message-${messageClass}`}>
+        <div className={`time-sent-${messageClass}`}>
+          {convertToPST(toDateTime(createdAt))}
+        </div>
         <p className={`message-${messageClass}`}>{text}</p>
       </div>
     </div>

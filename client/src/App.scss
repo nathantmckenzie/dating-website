@@ -264,6 +264,9 @@ vertical-align: middle;
 
 .settings-picture {
   border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
   margin-left: 10px;
   margin-top: 10px;
   border-color: white;
@@ -427,7 +430,6 @@ vertical-align: middle;
   padding: 10px;
   overflow-y: scroll;
   display: flex;
-  align-items: flex-end;
   flex-direction: column;
   height: 90%;
 }
@@ -482,6 +484,19 @@ vertical-align: middle;
   background: black;
 }
 
+.message-received {
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: black;
+  background: grey;
+  background-attachment: fixed;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .message-sent {
   border-radius: 20px;
   padding: 8px 15px;
@@ -500,24 +515,39 @@ vertical-align: middle;
   display: contents;
 }
 
-.time-sent {
+.time-sent-sent {
   margin-top: 13px;
   margin-right: 10px;
   font-size: small;
-}
-
-.time-and-message {
-  display: flex;
-}
-
-.time-sent{
   visibility: hidden;
 }
 
+.time-sent-received {
+  font-size: small;
+  visibility: hidden;
+  margin-top: 13px;
+  margin-left: 10px;
+}
 
-.time-and-message:hover > .time-sent {
+
+.time-and-message-sent {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.time-and-message-received {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+
+
+
+.time-and-message-sent:hover > .time-sent-sent, .time-and-message-received:hover > .time-sent-received {
  visibility: visible;
 }
+
 
 
 
