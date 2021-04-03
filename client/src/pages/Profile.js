@@ -28,25 +28,41 @@ export default function Profile({ showProfileUID, details }) {
   }, [profile, pictureNumber]);
 
   function nextPicture() {
-    //console.log("PICTURE NUMBER", pictureNumber);
     setPictureNumber((prevState) => prevState + 1);
-    //console.log("PICTURE NUMBER", pictureNumber);
-    //setCurrentPicture(profile.avatar[pictureNumber]);
   }
 
   function previousPicture() {
     setPictureNumber((prevState) => prevState - 1);
-    console.log("PICTURE NUMBER", pictureNumber);
-    //setCurrentPicture(profile.avatar[pictureNumber]);
   }
 
   return (
     <div className="profile-column">
       {profile ? (
         <>
+          {console.log("AVATAR LENGTH", profile.avatar.length)}
           <img src={currentPicture} className="profile-picture-rightside" />
-          <button onClick={previousPicture}>previous pics</button>
-          <button onClick={nextPicture}>more pics</button>
+          <button
+            onClick={pictureNumber > 0 ? previousPicture : null}
+            className={
+              pictureNumber > 0
+                ? "previous-picture-button"
+                : "hide-previous-picture-button"
+            }
+          >
+            previous pics
+          </button>
+          <button
+            onClick={
+              pictureNumber < profile.avatar.length - 1 ? nextPicture : null
+            }
+            className={
+              pictureNumber < profile.avatar.length - 1
+                ? "next-picture-button"
+                : "hide-next-picture-button"
+            }
+          >
+            more pics
+          </button>
           <div className="profile-info">
             <h2>{profile.firstName}</h2>
             <h4>{profile.personality}</h4>
