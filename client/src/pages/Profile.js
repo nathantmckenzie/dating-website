@@ -4,6 +4,7 @@ import { app } from "../base";
 export default function Profile({ showProfileUID, details }) {
   const [profile, setProfile] = useState();
   const [currentPicture, setCurrentPicture] = useState();
+  const [pictureNumber, setPictureNumber] = useState(1);
   const db = app.firestore();
 
   let filtered = details.filter(
@@ -14,19 +15,32 @@ export default function Profile({ showProfileUID, details }) {
     setProfile(filtered);
   }, []);
 
-  let i = 0;
+  useEffect(() => {
+    if (profile) {
+      setCurrentPicture(profile.avatar[0]);
+    }
+  }, [profile]);
+
   function nextPicture(pics) {
-    setCurrentPicture(pics[i]);
-    i++;
+    setPictureNumber(pictureNumber + 1);
+    console.log("PICTURE NUMBER", pictureNumber);
+    setCurrentPicture(pics[pictureNumber]);
+  }
+
+  function previousPicture(pics) {
+    setPictureNumber(pictureNumber - 1);
+    console.log("PICTURE NUMBER", pictureNumber);
+    setCurrentPicture(pics[pictureNumber]);
   }
 
   return (
     <div className="profile-column">
       {profile ? (
         <>
-          {console.log("FILTERED", filtered)}
-          <img src={currentPicture} width="100%" height="400" />
-          <button>previous pics</button>
+          <img src={currentPicture} className="profile-picture-rightside" />
+          <button onClick={() => previousPicture(profile.avatar)}>
+            previous pics
+          </button>
           <button onClick={() => nextPicture(profile.avatar)}>more pics</button>
           <div className="profile-info">
             <h2>{profile.firstName}</h2>

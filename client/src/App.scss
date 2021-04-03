@@ -533,15 +533,15 @@ vertical-align: middle;
 .time-and-message-sent {
   display: flex;
   justify-content: flex-end;
+  width: 100%;
 }
 
 .time-and-message-received {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
+  width: 50%;
 }
-
-
 
 
 .time-and-message-sent:hover > .time-sent-sent, .time-and-message-received:hover > .time-sent-received {
@@ -595,6 +595,16 @@ vertical-align: middle;
   justify-content: center;
   width: 100%;
 }
+
+.profile-picture-rightside {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+
+
+
 
 /*-------SETTINGS-------------*/
 
