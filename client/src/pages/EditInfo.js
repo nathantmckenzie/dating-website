@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { app, firebaseAuth } from "../base";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import DeletePictureIcon from "@material-ui/icons/HighlightOff";
 import firebase from "firebase";
 
 export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
@@ -44,6 +44,7 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
       .update({
         avatar: firebase.firestore.FieldValue.arrayRemove(profile.avatar[0]),
       });
+    window.location.reload();
   };
 
   return (
@@ -54,7 +55,10 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
             <div>
               <img className="picture-settings" src={profile.avatar[0]} />
               <div className="delete-picture-button">
-                <HighlightOffIcon onClick={deletePicture} />
+                <DeletePictureIcon
+                  onClick={deletePicture}
+                  className="delete-picture-button"
+                />
               </div>
             </div>
             <img className="picture-settings" src={profile.avatar[1]} />

@@ -51,7 +51,6 @@ export default function Matches({
                 className="match-picture-name"
                 onClick={onClickMatch}
               >
-                {console.log("DETAIL", detail)}
                 <img
                   src={detail.avatar ? detail.avatar : noProfilePicture}
                   className="match-picture"

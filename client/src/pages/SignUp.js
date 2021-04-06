@@ -29,6 +29,7 @@ export default function Signup() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
+      await console.log("CURRENT UID", currentUid);
       await db
         .collection("users")
         .doc(currentUid)

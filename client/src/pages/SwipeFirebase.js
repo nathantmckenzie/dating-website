@@ -14,8 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import noProfilePicture from "../pictures/no-profile-picture.png";
 import Chat from "./Chat";
 
-export default function SwipeFirebase() {
-  const [details, setDetails] = useState();
+export default function SwipeFirebase({ details, setDetails }) {
   const [matchMessage, setMatchMessage] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [lastMessage, setLastMessage] = useState("");
@@ -24,20 +23,6 @@ export default function SwipeFirebase() {
 
   const db = app.firestore();
   const currentEmail = firebaseAuth.currentUser.email;
-
-  useEffect(() => {
-    let firebaseData;
-    db.collection("users")
-      .get()
-      .then(function (querySnapshot) {
-        firebaseData = querySnapshot.docs.map(function (doc) {
-          // doc.id
-
-          return doc.data();
-        });
-      })
-      .then(() => setDetails(firebaseData));
-  }, []);
 
   function makeid(length) {
     var result = "";

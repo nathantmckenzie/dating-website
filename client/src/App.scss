@@ -711,6 +711,11 @@ vertical-align: middle;
   display: grid;
   grid-template-columns: repeat(3, auto);
   margin: 10px;
+  justify-content: space-around;
+}
+
+.delete-picture-button {
+  transform: scale(1.4);
 }
 
 .create-photo-div {

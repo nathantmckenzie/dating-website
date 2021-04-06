@@ -1,12 +1,14 @@
 import "./App.scss";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
+import { app, firebaseAuth } from "./base";
 import Home from "./pages/Home";
 import PersonalityQuiz from "./pages/PersonalityQuiz";
 import PhotoUpload from "./pages/PhotoUpload";
 import Results from "./pages/Results";
 import Chat from "./pages/Chat";
 import Swipe from "./pages/Swipe";
+import Settings from "./pages/Settings";
 import SwipeFirebase from "./pages/SwipeFirebase";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
@@ -14,14 +16,31 @@ import AccountDetails from "./pages/AccountDetails";
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
+  const [details, setDetails] = useState();
   const [result, setResult] = useState("Show me the results");
   const [avatars, setAvatars] = useState([]);
+  const [showSettings, setShowSettings] = useState(false);
+
+  const db = app.firestore();
+
+  useEffect(() => {
+    let firebaseData;
+    db.collection("users")
+      .get()
+      .then(function (querySnapshot) {
+        firebaseData = querySnapshot.docs.map(function (doc) {
+          // doc.id
+
+          return doc.data();
+        });
+      })
+      .then(() => setDetails(firebaseData));
+  }, []);
 
   return (
     <AuthProvider>
       <Router>
         <div className="App">
-          <Route path="/" component={Home} />
           <Route path="/signup" component={SignUp} />
           <Route path="/signin" component={SignIn} />
           <Route
@@ -47,7 +66,18 @@ function App() {
             result={result}
             setResult={setResult}
           />
-          <Route path="/swipefirebase" component={SwipeFirebase} />
+          <Route
+            path="/swipefirebase"
+            component={() => (
+              <SwipeFirebase details={details} setDetails={setDetails} />
+            )}
+          />
+          <Route
+            path="/settings"
+            component={() => (
+              <Settings details={details} setDetails={setDetails} />
+            )}
+          />
         </div>
       </Router>
     </AuthProvider>

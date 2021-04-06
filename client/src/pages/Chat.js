@@ -2,48 +2,52 @@ import React, { useEffect, useState, useRef } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { app, auth, firebaseAuth, firestore } from "../base";
+import { auth, firestore } from "../base";
+import moment from "moment";
 
 const ChatMessage = ({ message }) => {
   const { text, uid, createdAt } = message;
   const [currentDate, setCurrentDate] = useState(null);
+  const [currentTime, setCurrentTime] = useState(null);
+  const [displayNewDate, setDisplayNewDate] = useState();
 
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
 
-  function toDateTime(secs) {
-    var t = new Date(secs * 1000).toISOString().substr(11, 5);
-    return t;
-  }
-
-  function toFullDateTime(secs) {
-    var t = new Date(secs * 1000).toISOString().substr(5, 5);
-    return t;
-  }
-
-  function convertToPST(t) {
-    let hour = parseInt(t.slice(0, 2)) - 7;
-    let minutes = t.slice(2);
-    if (hour > 11) {
-      return (hour - 12).toString() + minutes + " PM";
+  function toTime(secs) {
+    const time = moment.unix(secs).toString().substr(16, 5);
+    let hours = parseInt(time.slice(0, 2));
+    if (hours > 12) {
+      let hours = parseInt(time.slice(0, 2));
+      console.log(hours);
+      return (hours - 12).toString() + time.slice(2) + " PM";
     } else {
-      return hour.toString() + minutes + " AM";
+      return time + " AM";
     }
   }
 
+  function toFullDate(secs) {
+    const date = moment.unix(secs).toString().substr(4, 6);
+    console.log("date", date);
+    return date;
+  }
+
   useEffect(() => {
-    console.log("AYY", toFullDateTime(createdAt));
-    setCurrentDate(toFullDateTime(createdAt));
-  }, [toFullDateTime(createdAt)]);
+    console.log("AYY", toFullDate(createdAt));
+    setCurrentDate(toFullDate(createdAt));
+    console.log("CURRENT DATE", currentDate);
+  }, []);
+
+  useEffect(() => {
+    console.log("currentDate", currentDate);
+    setDisplayNewDate(currentDate);
+  }, [currentDate]);
 
   return (
     <div className="timesent-messagesent">
-      <div className="date-sent">{currentDate}-2021</div>
+      <div className="date-sent">{displayNewDate}, 2021</div>
       <div className={`time-and-message-${messageClass}`}>
-        <div className={`time-sent-${messageClass}`}>
-          {convertToPST(toDateTime(createdAt))}
-        </div>
+        <div className={`time-sent-${messageClass}`}>{toTime(createdAt)}</div>
         <p className={`message-${messageClass}`}>{text}</p>
       </div>
     </div>

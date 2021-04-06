@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function SettingsNavBar({ details, setShowSettings }) {
   const [profile, setProfile] = useState();
+  let history = useHistory();
 
   let filtered = details.filter(
     (detail) => detail.uid === "a484KBMpC4O1m3ICjeBnBcboEjc2"
@@ -14,7 +16,10 @@ export default function SettingsNavBar({ details, setShowSettings }) {
   return (
     <div>
       {profile ? (
-        <div className="settings-navbar">
+        <div
+          className="settings-navbar"
+          onClick={() => history.push("/settings")}
+        >
           <img
             src={profile.avatar[0]}
             className="settings-picture"
