@@ -1,24 +1,33 @@
 import React, { useState, useEffect } from "react";
+import noProfilePicture from "../pictures/no-profile-picture.png";
+import { app, firebaseAuth } from "../base";
 
 export default function PictureSettings({ details, setEditInfo }) {
   const [profile, setProfile] = useState();
+  const [profilePicture, setProfilePicture] = useState();
+  const currentUID = firebaseAuth.currentUser.uid;
 
-  let filtered = details.filter(
-    (detail) => detail.uid === "a484KBMpC4O1m3ICjeBnBcboEjc2"
-  )[0];
+  let filtered = details.filter((detail) => detail.uid === currentUID);
 
   useEffect(() => {
     setProfile(filtered);
   }, []);
+
+  useEffect(() => {
+    if (profile) {
+      setProfilePicture(profile[0].avatar[0]);
+    }
+  }, [profile]);
 
   return (
     <div className="picture-bio-settings">
       {profile ? (
         <div className="settings-card">
           <div className="picture-settings">
+            {console.log("profile bb", profile)}
             <img
               className="picture-settings"
-              src={profile.avatar[0]}
+              src={profilePicture}
               width="450"
               height="450"
             />

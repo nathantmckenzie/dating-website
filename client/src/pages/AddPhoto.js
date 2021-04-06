@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { app, firebaseAuth } from "../base";
 import firebase from "firebase";
 import selectPhoto from "../pictures/select-photo.png";
+import { useHistory } from "react-router-dom";
 
 export default function AddPhoto() {
   const [fileUrl, setFileUrl] = useState(null);
@@ -9,9 +10,9 @@ export default function AddPhoto() {
   const [test, setTest] = useState([]);
   const [bio, setBio] = useState();
 
+  const history = useHistory();
   const db = app.firestore();
-  const current = firebaseAuth.currentUser.email;
-  const currentUid = firebaseAuth.currentUser.uid;
+  const currentUID = firebaseAuth.currentUser.uid;
 
   const onFileChange = async (e) => {
     const file = e.target.files[0];
@@ -28,7 +29,7 @@ export default function AddPhoto() {
     }
     await db
       .collection("users")
-      .doc(current)
+      .doc(currentUID)
       .set(
         {
           // avatar: [fileUrl],
@@ -36,7 +37,7 @@ export default function AddPhoto() {
         },
         { merge: true }
       );
-    window.location.reload();
+    await history.push("/swipefirebase");
   };
 
   useEffect(() => {

@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { app, firebaseAuth } from "../base";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIcon from "@material-ui/icons/ArrowBackIos";
-import { app } from "../base";
 
 export default function Profile({ showProfileUID, details }) {
   const [profile, setProfile] = useState();
   const [currentPicture, setCurrentPicture] = useState();
   const [pictureNumber, setPictureNumber] = useState(0);
+  const currentUID = firebaseAuth.currentUser.uid;
   const db = app.firestore();
 
-  let filtered = details.filter(
-    (detail) => detail.uid === "a484KBMpC4O1m3ICjeBnBcboEjc2"
-  )[0];
+  let filtered = details.filter((detail) => detail.uid === currentUID)[0];
 
   useEffect(() => {
     setProfile(filtered);

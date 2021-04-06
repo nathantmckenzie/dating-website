@@ -5,27 +5,34 @@ import firebase from "firebase";
 
 export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
   const [profile, setProfile] = useState();
+  const [profilePicture, setProfilePicture] = useState();
   const [bio, setBio] = useState();
 
+  const currentUID = firebaseAuth.currentUser.uid;
   const db = app.firestore();
-  const current = firebaseAuth.currentUser.email;
-
-  let filtered = details.filter(
-    (detail) => detail.uid === "a484KBMpC4O1m3ICjeBnBcboEjc2"
-  )[0];
+  let filtered = details.filter((detail) => detail.uid === currentUID);
 
   useEffect(() => {
+    console.log("filtered", filtered);
     setProfile(filtered);
     // console.log("Profile.bio: ", profile.bio);
     if (profile && profile.bio) {
       setBio(profile.bio);
+      console.log("PROFILE BABY", profile);
     }
+    console.log("PROFILE BABY", profile);
   }, [filtered, profile]);
+
+  useEffect(() => {
+    if (profile) {
+      setProfilePicture(profile[0].avatar);
+    }
+  }, [profile]);
 
   const updateProfile = async (e) => {
     e.preventDefault();
 
-    await db.collection("users").doc(current).set(
+    await db.collection("users").doc(currentUID).set(
       {
         // avatar: [fileUrl]
         bio: bio,
@@ -40,7 +47,7 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
 
     await db
       .collection("users")
-      .doc(current)
+      .doc(currentUID)
       .update({
         avatar: firebase.firestore.FieldValue.arrayRemove(profile.avatar[0]),
       });
@@ -53,7 +60,10 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
         <div className="settings-card">
           <div className="all-pictures-settings">
             <div>
-              <img className="picture-settings" src={profile.avatar[0]} />
+              <img
+                className="picture-settings"
+                src={profilePicture ? profilePicture[0] : null}
+              />
               <div className="delete-picture-button">
                 <DeletePictureIcon
                   onClick={deletePicture}
@@ -61,12 +71,21 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
                 />
               </div>
             </div>
-            <img className="picture-settings" src={profile.avatar[1]} />
-            <img className="picture-settings" src={profile.avatar[2]} />
-            <img className="picture-settings" src={profile.avatar[3]} />
             <img
               className="picture-settings"
-              src={profile.avatar[4] ? profile.avatar[4] : <div>hi</div>}
+              src={profilePicture ? profilePicture[1] : null}
+            />
+            <img
+              className="picture-settings"
+              src={profile.avatar ? profile.avatar[2] : null}
+            />
+            <img
+              className="picture-settings"
+              src={profile.avatar ? profile.avatar[3] : null}
+            />
+            <img
+              className="picture-settings"
+              src={profile.avatar ? profile.avatar[4] : null}
             />
           </div>
           <div className="add-media-button">

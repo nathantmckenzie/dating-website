@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import firebase from "firebase";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
@@ -25,32 +26,34 @@ export default function Signup() {
       return setError("Passwords do not match");
     }
 
-    try {
-      setError("");
-      setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-      await db
-        .collection("users")
-        .doc(emailRef)
-        .set(
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(
+        emailRef.current.value,
+        passwordRef.current.value
+      )
+      .then(async (userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        await db.collection("users").doc(user.uid).set(
           {
             firstName: firstNameRef.current.value,
             lastName: lastNameRef.current.value,
+            //email: emailRef.current.value,
+            uid: user.uid,
           },
           { merge: true }
-        )
-        .then(() => {
-          console.log("Document successfully written!");
-        })
-        .catch((error) => {
-          console.error("Error writing document: ", error);
-        });
-      history.push("/personalityquiz");
-    } catch (error) {
-      console.log("ERROR", error);
-
-      setError("Failed to create an account");
-    }
+        );
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ..
+      })
+      .then(() => {
+        history.push("/swipefirebase");
+      });
 
     setLoading(false);
   }
