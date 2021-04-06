@@ -10,7 +10,7 @@ const ChatMessage = ({ message }) => {
   const { text, uid, createdAt } = message;
   const [currentDate, setCurrentDate] = useState(null);
   const [currentTime, setCurrentTime] = useState(null);
-  const [displayNewDate, setDisplayNewDate] = useState();
+  const [displayNewDate, setDisplayNewDate] = useState(null);
 
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
 
@@ -19,7 +19,6 @@ const ChatMessage = ({ message }) => {
     let hours = parseInt(time.slice(0, 2));
     if (hours > 12) {
       let hours = parseInt(time.slice(0, 2));
-      console.log(hours);
       return (hours - 12).toString() + time.slice(2) + " PM";
     } else {
       return time + " AM";
@@ -33,19 +32,16 @@ const ChatMessage = ({ message }) => {
   }
 
   useEffect(() => {
-    console.log("AYY", toFullDate(createdAt));
     setCurrentDate(toFullDate(createdAt));
-    console.log("CURRENT DATE", currentDate);
   }, []);
 
-  useEffect(() => {
-    console.log("currentDate", currentDate);
-    setDisplayNewDate(currentDate);
-  }, [currentDate]);
+  //useEffect(() => {
+  //  setDisplayNewDate(toFullDate(createdAt));
+  //}, [toFullDate(createdAt)]);
 
   return (
     <div className="timesent-messagesent">
-      <div className="date-sent">{displayNewDate}, 2021</div>
+      <div className="date-sent">{toFullDate(createdAt)}, 2021</div>
       <div className={`time-and-message-${messageClass}`}>
         <div className={`time-sent-${messageClass}`}>{toTime(createdAt)}</div>
         <p className={`message-${messageClass}`}>{text}</p>
