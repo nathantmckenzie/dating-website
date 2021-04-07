@@ -9,6 +9,7 @@ export default function Signup() {
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
+  const ageRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
@@ -39,7 +40,7 @@ export default function Signup() {
           {
             firstName: firstNameRef.current.value,
             lastName: lastNameRef.current.value,
-            //email: emailRef.current.value,
+            age: ageRef.current.value,
             uid: user.uid,
           },
           { merge: true }
@@ -72,6 +73,10 @@ export default function Signup() {
             <Form.Group id="last-name">
               <Form.Label>Last Name</Form.Label>
               <Form.Control type="text" ref={lastNameRef} required />
+            </Form.Group>
+            <Form.Group id="age">
+              <Form.Label>Age</Form.Label>
+              <Form.Control type="date" ref={ageRef} required />
             </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>

@@ -21,11 +21,15 @@ export default function Matches({
   const [myMatches, setMyMatches] = useState();
   const { uid } = auth.currentUser;
   const currentUID = firebaseAuth.currentUser.uid;
+  const currentMatches = firebaseAuth.currentUser.matches;
 
   useEffect(() => {
-    setMyMatches(
-      details.filter((detail) => detail.uid === currentUID)[0].matches
-    );
+    if (currentMatches) {
+      setMyMatches(
+        details.filter((detail) => detail.uid === currentUID)[0].matches
+      );
+      console.log("CURRENTMATCHES", currentMatches);
+    }
   }, [details]);
 
   useEffect(() => {

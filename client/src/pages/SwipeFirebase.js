@@ -15,7 +15,6 @@ import noProfilePicture from "../pictures/no-profile-picture.png";
 import Chat from "./Chat";
 
 export default function SwipeFirebase({ details, setDetails }) {
-  const [matchMessage, setMatchMessage] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [lastMessage, setLastMessage] = useState("");
   const [showProfileUID, setShowProfileUID] = useState();
@@ -24,6 +23,7 @@ export default function SwipeFirebase({ details, setDetails }) {
 
   const db = app.firestore();
   const currentEmail = firebaseAuth.currentUser.email;
+  const currentUID = firebaseAuth.currentUser.uid;
 
   function makeid(length) {
     var result = "";
@@ -41,8 +41,8 @@ export default function SwipeFirebase({ details, setDetails }) {
       .doc(makeid(20))
       .set(
         {
-          by_user: currentEmail,
-          to_user: details[0].firstName,
+          by_user: currentUID,
+          to_user: details[0].uid,
           swipe_right: false,
         },
         { merge: true }
@@ -61,8 +61,8 @@ export default function SwipeFirebase({ details, setDetails }) {
       .doc(id)
       .set(
         {
-          by_user: currentEmail,
-          to_user: details[0].firstName,
+          by_user: currentUID,
+          to_user: details[0].uid,
           swipe_right: true,
         },
         { merge: true }
@@ -71,26 +71,16 @@ export default function SwipeFirebase({ details, setDetails }) {
         console.log("Document successfully written!");
       });
 
-    db.collection("users").doc(currentEmail).set(
-      {
-        match_id: id,
-      },
-      { merge: true }
-    );
-
-    {
-      /*db.collection("swipes")
-      .where("by_user", "==", details[0].firstName)
-      .where("swipe_ridght", "==", true)
-      .where("to_user", "==", currentEmail)
-      .then(console.log("LET'S GO"))
-      .then(() => {
-        setMatchMessage(true);
-      })
+    let query = db.collection("swipes");
+    query = query.where("by_user", "==", details[0].uid);
+    query = query.where("swipe_right", "==", true);
+    query = query.where("to_user", "==", currentUID);
+    query
+      .get()
+      .then(console.log("IT'S A MATCH"))
       .catch((error) => {
         console.log("Error getting documents: ", error);
-      });*/
-    }
+      });
 
     setDetails(details.filter((detail) => detail !== details[0]));
   };

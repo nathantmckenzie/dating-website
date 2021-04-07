@@ -7,7 +7,6 @@ import PersonalityQuiz from "./pages/PersonalityQuiz";
 import PhotoUpload from "./pages/PhotoUpload";
 import Results from "./pages/Results";
 import Chat from "./pages/Chat";
-import Swipe from "./pages/Swipe";
 import Settings from "./pages/Settings";
 import SwipeFirebase from "./pages/SwipeFirebase";
 import SignUp from "./pages/SignUp";
@@ -34,7 +33,8 @@ function App() {
           return doc.data();
         });
       })
-      .then(() => setDetails(firebaseData));
+      .then(() => setDetails(firebaseData))
+      .then(() => console.log(("DETAILS", details)));
   }, []);
 
   return (
