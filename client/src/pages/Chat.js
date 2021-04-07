@@ -50,10 +50,13 @@ const ChatMessage = ({ message }) => {
 };
 
 const Chat = ({ setLastMessage, showMatchID }) => {
-  console.log("showMatchIDDDD", showMatchID);
+  useEffect(() => {
+    console.log("showMatchIDDDD", showMatchID);
+  }, []);
+
   const messagesRef = firestore
     .collection("matches")
-    .doc(showMatchID)
+    .doc(showMatchID ? showMatchID : "Vbvqom5hHmS3lkRqWnNw")
     .collection("messages");
   const query = messagesRef.orderBy("createdAt");
 
