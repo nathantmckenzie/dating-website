@@ -10,11 +10,12 @@ export default function Profile({ showProfileUID, details }) {
   const currentUID = firebaseAuth.currentUser.uid;
   const db = app.firestore();
 
-  let filtered = details.filter((detail) => detail.uid === currentUID)[0];
+  let filtered;
 
   useEffect(() => {
+    filtered = details.filter((detail) => detail.uid === showProfileUID)[0];
     setProfile(filtered);
-  }, []);
+  }, [showProfileUID]);
 
   useEffect(() => {
     if (profile) {

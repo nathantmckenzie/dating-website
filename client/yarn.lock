@@ -1119,7 +1119,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.13.8", "@babel/runtime@^7.6.3":
+"@babel/runtime@^7.13.8", "@babel/runtime@^7.3.4", "@babel/runtime@^7.6.3":
   version "7.13.10"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.13.10.tgz#47d42a57b6095f4468da440388fdbad8bebf0d7d"
   integrity sha512-4QPkjJq6Ns3V/RgpEahRk+AGfL0eO6RHHtTWoNNr5mO49G6B5+X6d6THgWEAvTrznU5xYpbAlVKRYcsCgh/Akw==
@@ -7471,7 +7471,7 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.1, hoist-non-react-statics@^3.3.2:
+hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -12223,6 +12223,14 @@ react-firebase-hooks@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/react-firebase-hooks/-/react-firebase-hooks-3.0.3.tgz#61310fce721a23ad6f50cd1159a6ced87088adff"
   integrity sha512-g66N21BTzuYWmQhWiTkBPwkrHcK5wNVpq/xkaAyWWDOl3zo9Yx/Q3nG+yVlj966Xi3E5ABC7a/Efk2LNAzzGPA==
+
+react-firestore@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-firestore/-/react-firestore-1.0.1.tgz#4d3dadd6c1f5ade5efc01763610abeddf73a811f"
+  integrity sha512-gOsvXOJYx3LT8yugw1y0kbqEyL74IV8srjl/kRxktp9oqMJPhPjZ9ZJSBtM8osan7XAduK+orIVrh6dJe36WKA==
+  dependencies:
+    "@babel/runtime" "^7.3.4"
+    hoist-non-react-statics "^3.3.0"
 
 react-is@^16.3.2, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"

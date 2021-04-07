@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { app, firebaseAuth } from "../base";
+import { useHistory } from "react-router-dom";
 import DeletePictureIcon from "@material-ui/icons/HighlightOff";
 import firebase from "firebase";
 
@@ -8,6 +9,7 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
   const [profilePicture, setProfilePicture] = useState();
   const [bio, setBio] = useState();
 
+  const history = useHistory();
   const currentUID = firebaseAuth.currentUser.uid;
   const db = app.firestore();
   let filtered = details.filter((detail) => detail.uid === currentUID);
@@ -39,7 +41,7 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
       },
       { merge: true }
     );
-    window.location.reload();
+    await history.push("/swipefirebase");
   };
 
   const deletePicture = async (e) => {

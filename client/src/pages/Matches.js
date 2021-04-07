@@ -3,8 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { app, auth, firebaseAuth, firestore } from "../base";
 import noProfilePicture from "../pictures/no-profile-picture.png";
-import Chat from "./Chat";
-import Settings from "./SettingsNavBar";
+import { FirestoreCollection } from "react-firestore";
 
 export default function Matches({
   possibleMatches,
@@ -14,8 +13,8 @@ export default function Matches({
   lastMessage,
   showProfile,
   setShowProfileUID,
+  showProfileUID,
 }) {
-  const history = useHistory();
   const [showMatches, setShowMatches] = useState(true);
   const { uid } = auth.currentUser;
 
@@ -38,7 +37,7 @@ export default function Matches({
       <br />
       {showMatches ? (
         <div className="all-matches" pre>
-          {details.map((detail) => {
+          {/*{details.map((detail) => {
             {
               var onClickMatch = () => {
                 setShowChat(true);
@@ -58,7 +57,40 @@ export default function Matches({
                 <h4 className="match-name">{detail.firstName} </h4>
               </div>
             );
-          })}
+          })}*/}
+          <FirestoreCollection
+            path="users"
+            render={({ isLoading, data }) => {
+              return isLoading ? (
+                <div>null</div>
+              ) : (
+                data.map((user) => {
+                  {
+                    var onClickMatch = () => {
+                      setShowChat(true);
+                      setShowProfileUID(user.uid);
+                      console.log("SHOW PROFILE UID", showProfileUID);
+                    };
+                  }
+                  return (
+                    <>
+                      <div
+                        key={user.uid}
+                        className="match-picture-name"
+                        onClick={onClickMatch}
+                      >
+                        <img
+                          src={user.avatar ? user.avatar[0] : noProfilePicture}
+                          className="match-picture"
+                        />
+                        <h4 className="match-name">{user.firstName} </h4>
+                      </div>
+                    </>
+                  );
+                })
+              );
+            }}
+          />
         </div>
       ) : (
         <div className="all-messages" pre>

@@ -15,7 +15,9 @@ export default function PictureSettings({ details, setEditInfo }) {
 
   useEffect(() => {
     if (profile) {
-      setProfilePicture(profile[0].avatar[0]);
+      setProfilePicture(
+        profile[0].avatar ? profile[0].avatar[0] : noProfilePicture
+      );
     }
   }, [profile]);
 

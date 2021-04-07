@@ -3,10 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import firebase from "firebase/app";
+import { FirestoreProvider } from "react-firestore";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <FirestoreProvider firebase={firebase}>
+      <App />
+    </FirestoreProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
