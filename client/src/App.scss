@@ -4,7 +4,7 @@
 
 
 
-/*----------PERSONALITY QUIZ-------------*/
+/*----------PERSONALITY QUIZ SECTION-------------*/
 
 .btn-circle {
   width: 30px;
@@ -269,7 +269,7 @@ vertical-align: middle;
   object-fit: cover;
   margin-left: 10px;
   margin-top: 10px;
-  border-color: white;
+  border: 2px solid white;
 }
 
 .settings-navbar {
@@ -424,19 +424,42 @@ vertical-align: middle;
   flex-direction: row;
 }
 
-/*--------CHAT------------*/
+/*--------CHAT SECTION------------*/
+
+
+.chat-top-bar {
+  position: fixed;
+  height: 100px;
+  border-style: solid;
+  width: 100vw;
+  background-color: #f9f9f9;
+}
+
+.chat-top-bar-picture {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-left: 20px;
+  margin-top: 20px;
+  border: 3px solid white;
+  box-shadow: 3px 3px 5px grey;
+}
+
+
 
 .chat-main {
   padding: 10px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  height: 90%;
+  height: 76%;
+  margin-top: 100px;
 }
 
 
 .chat-form {
-  height: 10vh;
+  height: 70px;
   position: fixed;
   bottom: 0;
   width: 52.5%;
@@ -550,35 +573,28 @@ vertical-align: middle;
 
 
 
-
-
-
 .report-unmatch {
   bottom: 0;
   position: fixed;
-  width: 100%;
-  height: 10vh;
+  width: 335px;
+  height: 70px;
 }
 
 .report-button {
-  width: 170px;
-  height: 10vh;
+  width: 50%;
+  height: 70px;
 }
 
 .report-button:hover {
-  width: 170px;
-  height: 10vh;
   background-color: red;
 }
 
 .unmatch-button {
-  width: 170px;
-  height: 10vh;
+  width: 50%;
+  height: 70px;
 }
 
 .unmatch-button:hover {
-  width: 170px;
-  height: 10vh;
   background-color: red;
 }
 
@@ -654,7 +670,7 @@ vertical-align: middle;
 
 
 
-/*-------SETTINGS-------------*/
+/*-------SETTINGS SECTION-------------*/
 
 .settings-container {
   display: grid;
@@ -781,7 +797,7 @@ vertical-align: middle;
 
 
 
-/*-------RESPONSIVE DESIGN------------*/
+/*-------RESPONSIVE DESIGN SECTION------------*/
 
 @media screen and (max-width:1000px) {
   .profile-column{
@@ -801,7 +817,7 @@ vertical-align: middle;
   }
 }
 
-@media screen and (max-width:650px) {
+@media screen and (max-width:800px) {
   .chat-column {
     width:100vw; 
   }

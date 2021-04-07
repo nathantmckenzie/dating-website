@@ -49,20 +49,34 @@ const ChatMessage = ({ message }) => {
   );
 };
 
-const Chat = ({ setLastMessage, showMatchID }) => {
+const Chat = ({ setLastMessage, showMatchID, details, showProfileUID }) => {
   useEffect(() => {
-    console.log("showMatchIDDDD", showMatchID);
-  }, []);
+    console.log("SHOW MATCH IDD", showMatchID);
+  }, [showMatchID]);
 
   const messagesRef = firestore
     .collection("matches")
-    .doc(showMatchID ? showMatchID : "Vbvqom5hHmS3lkRqWnNw")
+    .doc(showMatchID)
     .collection("messages");
   const query = messagesRef.orderBy("createdAt");
 
   const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
+  const [currentPicture, setCurrentPicture] = useState();
+  const [profile, setProfile] = useState();
   const dummy = useRef();
+  let filtered;
+
+  useEffect(() => {
+    filtered = details.filter((detail) => detail.uid === showProfileUID)[0];
+    setProfile(filtered);
+  }, [showProfileUID]);
+
+  useEffect(() => {
+    if (profile) {
+      setCurrentPicture(profile.avatar[0]);
+    }
+  }, [profile]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -95,6 +109,9 @@ const Chat = ({ setLastMessage, showMatchID }) => {
 
   return (
     <div className="chat-column">
+      <div className="chat-top-bar">
+        <img className="chat-top-bar-picture" src={currentPicture} />
+      </div>
       <div className="chat-main">
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}

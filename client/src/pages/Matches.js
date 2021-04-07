@@ -21,13 +21,16 @@ export default function Matches({
   const [myMatches, setMyMatches] = useState();
   const { uid } = auth.currentUser;
   const currentUID = firebaseAuth.currentUser.uid;
-  const arr2 = ["lfp6SpKujxFAMK3E8cYE", "Vbvqom5hHmS3lkRqWnNw"];
 
   useEffect(() => {
     setMyMatches(
       details.filter((detail) => detail.uid === currentUID)[0].matches
     );
   }, [details]);
+
+  useEffect(() => {
+    console.log("showMatchID", showMatchID);
+  }, [showMatchID]);
 
   return (
     <div>
@@ -48,32 +51,11 @@ export default function Matches({
       <br />
       {showMatches ? (
         <div className="all-matches" pre>
-          {/*{details.map((detail) => {
-            {
-              var onClickMatch = () => {
-                setShowChat(true);
-                setShowProfileUID(detail.uid);
-              };
-            }
-            return (
-              <div
-                key={detail.uid}
-                className="match-picture-name"
-                onClick={onClickMatch}
-              >
-                <img
-                  src={detail.avatar ? detail.avatar : noProfilePicture}
-                  className="match-picture"
-                />
-                <h4 className="match-name">{detail.firstName} </h4>
-              </div>
-            );
-          })}*/}
           <FirestoreCollection
             path="users"
             render={({ isLoading, data }) => {
               return isLoading ? (
-                <div>null</div>
+                <div>Loading</div>
               ) : (
                 data
                   .filter((user) => user.uid !== currentUID)
@@ -83,13 +65,14 @@ export default function Matches({
                         setShowChat(true);
                         setShowProfileUID(user.uid);
                         {
-                          console.log("MyMatches", myMatches);
+                          console.log("user.matches", user.matches);
+                        }
+                        {
+                          console.log("my matches", myMatches);
                         }
                         setShowMatchID(
                           user.matches
-                            .filter(
-                              (element) => element === "Vbvqom5hHmS3lkRqWnNw" //arr2.includes(element)
-                            )
+                            .filter((element) => myMatches.includes(element))
                             .toString()
                         );
                       };
@@ -128,6 +111,11 @@ export default function Matches({
                 data
                   .filter((user) => user.uid !== currentUID)
                   .map((user) => {
+                    var match = user.matches
+                      .filter(
+                        (element) => element === "Vbvqom5hHmS3lkRqWnNw" //arr2.includes(element)
+                      )
+                      .toString();
                     {
                       var onClickMatch = () => {
                         setShowChat(true);
@@ -135,13 +123,7 @@ export default function Matches({
                         {
                           console.log("MyMatches", myMatches);
                         }
-                        setShowMatchID(
-                          user.matches
-                            .filter(
-                              (element) => element === "Vbvqom5hHmS3lkRqWnNw" //arr2.includes(element)
-                            )
-                            .toString()
-                        );
+                        setShowMatchID(match);
                       };
                     }
 

@@ -177,6 +177,8 @@ export default function SwipeFirebase({ details, setDetails }) {
             ) : (
               <div className="chat-profile">
                 <Chat
+                  details={details}
+                  showProfileUID={showProfileUID}
                   setLastMessage={setLastMessage}
                   showMatchID={showMatchID}
                 />
