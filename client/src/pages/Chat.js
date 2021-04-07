@@ -27,7 +27,6 @@ const ChatMessage = ({ message }) => {
 
   function toFullDate(secs) {
     const date = moment.unix(secs).toString().substr(4, 6);
-    console.log("date", date);
     return date;
   }
 
@@ -50,10 +49,11 @@ const ChatMessage = ({ message }) => {
   );
 };
 
-const Chat = ({ setLastMessage }) => {
+const Chat = ({ setLastMessage, showMatchID }) => {
+  console.log("showMatchIDDDD", showMatchID);
   const messagesRef = firestore
-    .collection("swipes")
-    .doc("31jExSMfFwTwzYb0AFk0")
+    .collection("matches")
+    .doc(showMatchID)
     .collection("messages");
   const query = messagesRef.orderBy("createdAt");
 
@@ -63,7 +63,7 @@ const Chat = ({ setLastMessage }) => {
 
   const sendMessage = async (e) => {
     e.preventDefault();
-
+    console.log("MESSAGES REF", messagesRef);
     const { uid } = auth.currentUser;
 
     if (formValue.length > 0) {

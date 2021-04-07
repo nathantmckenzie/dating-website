@@ -14,9 +14,12 @@ export default function Matches({
   showProfile,
   setShowProfileUID,
   showProfileUID,
+  setShowMatchID,
+  showMatchID,
 }) {
   const [showMatches, setShowMatches] = useState(true);
   const { uid } = auth.currentUser;
+  const matchID = "lfp6SpKujxFAMK3E8cYE";
 
   return (
     <div>
@@ -69,7 +72,14 @@ export default function Matches({
                     var onClickMatch = () => {
                       setShowChat(true);
                       setShowProfileUID(user.uid);
-                      console.log("SHOW PROFILE UID", showProfileUID);
+                      setShowMatchID(
+                        user.matches
+                          .filter(
+                            (element) => element === "Vbvqom5hHmS3lkRqWnNw"
+                          )
+                          .toString()
+                      );
+                      console.log("SHOWMATCHID", showMatchID);
                     };
                   }
                   return (

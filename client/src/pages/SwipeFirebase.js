@@ -20,6 +20,7 @@ export default function SwipeFirebase({ details, setDetails }) {
   const [lastMessage, setLastMessage] = useState("");
   const [showProfileUID, setShowProfileUID] = useState();
   const [showSettings, setShowSettings] = useState(false);
+  const [showMatchID, setShowMatchID] = useState();
 
   const db = app.firestore();
   const currentEmail = firebaseAuth.currentUser.email;
@@ -126,6 +127,8 @@ export default function SwipeFirebase({ details, setDetails }) {
                 setLastMessage={setLastMessage}
                 showProfileUID={showProfileUID}
                 setShowProfileUID={setShowProfileUID}
+                setShowMatchID={setShowMatchID}
+                showMatchID={showMatchID}
               />
             </div>
             {!showChat ? (
@@ -173,7 +176,10 @@ export default function SwipeFirebase({ details, setDetails }) {
               </div>
             ) : (
               <div className="chat-profile">
-                <Chat setLastMessage={setLastMessage} />
+                <Chat
+                  setLastMessage={setLastMessage}
+                  showMatchID={showMatchID}
+                />
                 <Profile
                   details={details}
                   showProfileUID={showProfileUID}
