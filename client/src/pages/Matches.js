@@ -16,6 +16,7 @@ export default function Matches({
   showProfileUID,
   setShowMatchID,
   showMatchID,
+  lastMessageUID,
 }) {
   const [showMatches, setShowMatches] = useState(true);
   const [myMatches, setMyMatches] = useState();
@@ -132,8 +133,11 @@ export default function Matches({
                           className="message-picture"
                         />
                         <div className="match-text">
+                          {console.log("3:50", lastMessageUID)}
                           <h3>{user.firstName} </h3>
-                          <h5>{lastMessage}</h5>
+                          <h5>
+                            {user.uid === lastMessageUID ? lastMessage : null}
+                          </h5>
                         </div>
                       </div>
                     );

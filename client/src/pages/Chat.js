@@ -52,16 +52,31 @@ const Chat = ({
   showProfileUID,
   setShowChat,
   showChat,
+  setLastMessageUID,
 }) => {
-  useEffect(() => {
-    console.log("SHOW MATCH IDD", showMatchID);
-  }, [showMatchID]);
-
   const messagesRef = firestore
     .collection("matches")
     .doc(showMatchID)
     .collection("messages");
   const query = messagesRef.orderBy("createdAt");
+
+  const lastMessageRef = firestore
+    .collection("matches")
+    .doc(showMatchID)
+    .collection("messages")
+    .doc("lastMessage");
+
+  firestore
+    .collection("matches")
+    .doc(showMatchID)
+    .collection("messages")
+    .doc("lastMessage")
+    .get()
+    .then((doc) => {
+      let data = doc.data();
+      setLastMessage(data.text);
+      setLastMessageUID(data.uid);
+    });
 
   const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
@@ -96,10 +111,13 @@ const Chat = ({
         uid,
       });
 
-      setLastMessage(formValue);
-
       setFormValue("");
     }
+    await lastMessageRef.set({
+      text: formValue,
+      uid: profile.uid,
+    });
+
     dummy.current.scrollIntoView({ behavior: "smooth" });
   };
 
