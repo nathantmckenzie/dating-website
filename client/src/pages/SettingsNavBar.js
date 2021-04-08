@@ -8,6 +8,7 @@ export default function SettingsNavBar({ details, setShowSettings }) {
 
   let history = useHistory();
   const currentUID = firebaseAuth.currentUser.uid;
+  console.log("CURRENT UID", currentUID);
 
   let filtered = details.filter((detail) => detail.uid === currentUID)[0];
 

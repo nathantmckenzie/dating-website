@@ -21,20 +21,12 @@ export default function Matches({
   const [myMatches, setMyMatches] = useState();
   const { uid } = auth.currentUser;
   const currentUID = firebaseAuth.currentUser.uid;
-  const currentMatches = firebaseAuth.currentUser.matches;
 
   useEffect(() => {
-    if (currentMatches) {
-      setMyMatches(
-        details.filter((detail) => detail.uid === currentUID)[0].matches
-      );
-      console.log("CURRENTMATCHES", currentMatches);
-    }
+    setMyMatches(
+      details.filter((detail) => detail.uid === currentUID)[0].matches
+    );
   }, [details]);
-
-  useEffect(() => {
-    console.log("showMatchID", showMatchID);
-  }, [showMatchID]);
 
   return (
     <div>
@@ -116,9 +108,7 @@ export default function Matches({
                   .filter((user) => user.uid !== currentUID)
                   .map((user) => {
                     var match = user.matches
-                      .filter(
-                        (element) => element === "Vbvqom5hHmS3lkRqWnNw" //arr2.includes(element)
-                      )
+                      .filter((element) => myMatches.includes(element))
                       .toString();
                     {
                       var onClickMatch = () => {
