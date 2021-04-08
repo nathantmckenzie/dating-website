@@ -34,10 +34,6 @@ const ChatMessage = ({ message }) => {
     setCurrentDate(toFullDate(createdAt));
   }, []);
 
-  //useEffect(() => {
-  //  setDisplayNewDate(toFullDate(createdAt));
-  //}, [toFullDate(createdAt)]);
-
   return (
     <div className="timesent-messagesent">
       <div className="date-sent">{toFullDate(createdAt)}, 2021</div>
@@ -49,7 +45,14 @@ const ChatMessage = ({ message }) => {
   );
 };
 
-const Chat = ({ setLastMessage, showMatchID, details, showProfileUID }) => {
+const Chat = ({
+  setLastMessage,
+  showMatchID,
+  details,
+  showProfileUID,
+  setShowChat,
+  showChat,
+}) => {
   useEffect(() => {
     console.log("SHOW MATCH IDD", showMatchID);
   }, [showMatchID]);
@@ -64,6 +67,8 @@ const Chat = ({ setLastMessage, showMatchID, details, showProfileUID }) => {
   const [formValue, setFormValue] = useState("");
   const [currentPicture, setCurrentPicture] = useState();
   const [profile, setProfile] = useState();
+  const [matchName, setMatchName] = useState();
+
   const dummy = useRef();
   let filtered;
 
@@ -75,6 +80,7 @@ const Chat = ({ setLastMessage, showMatchID, details, showProfileUID }) => {
   useEffect(() => {
     if (profile) {
       setCurrentPicture(profile.avatar[0]);
+      setMatchName(profile.firstName);
     }
   }, [profile]);
 
@@ -111,6 +117,13 @@ const Chat = ({ setLastMessage, showMatchID, details, showProfileUID }) => {
     <div className="chat-column">
       <div className="chat-top-bar">
         <img className="chat-top-bar-picture" src={currentPicture} />
+        <h3 className="chat-top-bar-message">You matched with {matchName}</h3>
+        <button
+          className="chat-top-bar-button"
+          onClick={() => setShowChat(!showChat)}
+        >
+          Keep Swiping
+        </button>
       </div>
       <div className="chat-main">
         {messages &&

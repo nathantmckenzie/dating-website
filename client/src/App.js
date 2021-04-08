@@ -16,7 +16,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   const [details, setDetails] = useState();
-  const [result, setResult] = useState("Show me the results");
+  const [result, setResult] = useState();
   const [avatars, setAvatars] = useState([]);
   const [showSettings, setShowSettings] = useState(false);
 

@@ -6,7 +6,6 @@ export default function SettingsSidebar({ setShowSettings }) {
 
   return (
     <div className="settings-sidebar">
-      Settings Sidebar{" "}
       <button onClick={() => history.push("/swipefirebase")}>Return</button>
     </div>
   );

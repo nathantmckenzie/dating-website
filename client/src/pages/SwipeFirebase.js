@@ -104,11 +104,6 @@ export default function SwipeFirebase({ details, setDetails }) {
                 details={details}
                 setShowSettings={setShowSettings}
               />
-              {showChat ? (
-                <button onClick={() => setShowChat(!showChat)}>
-                  Keep Swiping
-                </button>
-              ) : null}
               <Matches
                 details={details}
                 showChat={showChat}
@@ -171,6 +166,8 @@ export default function SwipeFirebase({ details, setDetails }) {
                   showProfileUID={showProfileUID}
                   setLastMessage={setLastMessage}
                   showMatchID={showMatchID}
+                  setShowChat={setShowChat}
+                  showChat={showChat}
                 />
                 <Profile
                   details={details}

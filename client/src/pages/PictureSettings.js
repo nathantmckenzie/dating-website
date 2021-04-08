@@ -26,7 +26,6 @@ export default function PictureSettings({ details, setEditInfo }) {
       {profile ? (
         <div className="settings-card">
           <div className="picture-settings">
-            {console.log("profile bb", profile)}
             <img
               className="picture-settings"
               src={profilePicture}

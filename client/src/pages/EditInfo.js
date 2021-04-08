@@ -12,22 +12,18 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
   const history = useHistory();
   const currentUID = firebaseAuth.currentUser.uid;
   const db = app.firestore();
-  let filtered = details.filter((detail) => detail.uid === currentUID);
+  let filtered = details.filter((detail) => detail.uid === currentUID)[0];
 
   useEffect(() => {
-    console.log("filtered", filtered);
     setProfile(filtered);
-    // console.log("Profile.bio: ", profile.bio);
-    if (profile && profile.bio) {
-      setBio(profile.bio);
-      console.log("PROFILE BABY", profile);
-    }
-    console.log("PROFILE BABY", profile);
-  }, [filtered, profile]);
+  }, [filtered]);
 
   useEffect(() => {
     if (profile) {
-      setProfilePicture(profile[0].avatar);
+      setProfilePicture(profile.avatar);
+    }
+    if (profile && profile.bio) {
+      setBio(profile.bio);
     }
   }, [profile]);
 
@@ -53,7 +49,7 @@ export default function EditInfo({ setEditInfo, details, setAddPhoto }) {
       .update({
         avatar: firebase.firestore.FieldValue.arrayRemove(profile.avatar[0]),
       });
-    window.location.reload();
+    await history.push("/swipefirebase");
   };
 
   return (
